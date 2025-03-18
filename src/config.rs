@@ -1,28 +1,28 @@
 use serde_derive::Deserialize;
 
 #[derive(Deserialize, Debug)]
-pub struct Config {
-    org_directory: String,
-    exclude_files: Option<Vec<String>>,
-    exclude_pattern: Option<String>,
+pub struct Userconfig {
+    pub org_directory: String,
+    pub exclude_files: Option<Vec<String>>,
+    pub exclude_pattern: Option<String>,
 }
 
-impl Config {
-    pub fn new() -> Config {
+impl Userconfig {
+    pub fn new() -> Userconfig {
         let home_dir: String = std::env::var("HOME").unwrap();
         let cfg_file_name: String = format!("{home_dir}/.config/tagger/tagger.toml");
         let cfg_file = &std::fs::read_to_string(cfg_file_name);
 
-        let data: Config = match cfg_file {
+        let data: Userconfig = match cfg_file {
             Ok(file) => toml::from_str(file).unwrap(),
-            Err(_) => Config {
+            Err(_) => Userconfig {
                 org_directory: format!("{home_dir}/Documents/Org/"),
                 exclude_files: None,
                 exclude_pattern: None,
             },
         };
 
-        Config {
+        Userconfig {
             org_directory: data.org_directory,
             exclude_files: data.exclude_files,
             exclude_pattern: data.exclude_pattern,
