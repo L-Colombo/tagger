@@ -9,4 +9,5 @@ serde_derive = "1.0.219"
 toml = "0.8.20"
 
 [dev-dependencies]
+pretty_assertions = "1.4.1"
 relative-path = "1.9.3"

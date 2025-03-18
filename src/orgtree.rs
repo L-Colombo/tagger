@@ -28,6 +28,7 @@ pub fn get_tags(input: &String) -> Option<Vec<String>> {
 #[cfg(test)]
 mod tests {
     use crate::orgtree::*;
+    use pretty_assertions::assert_eq;
 
     // TEST IS_HEADLINE
     #[test]
