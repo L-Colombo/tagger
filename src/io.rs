@@ -44,7 +44,7 @@ pub fn get_all_tags<'a>(cfg: &'a Userconfig) -> Option<Vec<String>> {
         .flatten()
         .collect();
 
-    tags.sort();
+    tags.sort_by(|a, b| a.to_lowercase().cmp(&b.to_lowercase()));
     tags.dedup();
 
     match tags.is_empty() {
@@ -78,7 +78,7 @@ pub fn get_tags_from_file(cfg: &Userconfig, file_name: String) -> Option<Vec<Str
         .flatten()
         .collect();
 
-    tags.sort();
+    tags.sort_by(|a, b| a.to_lowercase().cmp(&b.to_lowercase()));
     tags.dedup();
 
     match tags.is_empty() {
