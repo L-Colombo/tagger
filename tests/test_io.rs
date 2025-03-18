@@ -19,7 +19,7 @@ fn get_tags_from_all_files() {
     };
 
     assert_eq!(
-        get_all_tags(cfg),
+        get_all_tags(&cfg),
         Some(vec![
             String::from("bar_file_1"),
             String::from("bar_file_2"),
@@ -53,7 +53,7 @@ fn get_tags_from_all_files_with_exclude_files() {
     };
 
     assert_eq!(
-        get_all_tags(cfg),
+        get_all_tags(&cfg),
         Some(vec![
             String::from("bar_file_1"),
             String::from("baz_file_1"),
@@ -83,7 +83,7 @@ fn get_tags_from_one_file_that_has_tags() {
     let file: String = String::from("org_file1.org");
 
     assert_eq!(
-        get_tags_from_file(cfg, file),
+        get_tags_from_file(&cfg, file),
         Some(vec![
             String::from("bar_file_1"),
             String::from("baz_file_1"),
@@ -112,5 +112,5 @@ fn get_tags_from_one_file_that_has_no_tags() {
 
     let file: String = String::from("org_file_with_no_tags.org");
 
-    assert_eq!(get_tags_from_file(cfg, file), None)
+    assert_eq!(get_tags_from_file(&cfg, file), None)
 }
