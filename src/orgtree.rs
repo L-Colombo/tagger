@@ -26,6 +26,7 @@ pub fn get_tags(input: &str) -> Option<Vec<&str>> {
     taglist_opt
 }
 
+#[cfg(test)]
 mod tests {
     use crate::orgtree::*;
 
