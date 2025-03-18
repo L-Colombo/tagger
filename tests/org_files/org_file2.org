@@ -12,5 +12,5 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 ** This is a sub-headline with many tags and trailing withespace :trailing_baz_file_2:trailing_foo_file_2:  
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-** This sub-heading: it has many tags and colons which are not tag delimiters :non_delmiters_file_2:
+** This sub-heading: it has many tags and colons which are not tag delimiters :non_delimiters_file_2:
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
