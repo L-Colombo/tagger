@@ -23,7 +23,14 @@ impl Userconfig {
         };
 
         Userconfig {
-            org_directory: data.org_directory,
+            org_directory: {
+                if data.org_directory.starts_with('~') {
+                    let expanded_orgdir_path = data.org_directory.replace('~', home_dir.as_str());
+                    expanded_orgdir_path
+                } else {
+                    data.org_directory
+                }
+            },
             exclude_files: data.exclude_files,
             exclude_pattern: data.exclude_pattern,
         }
