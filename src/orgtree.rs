@@ -1,5 +1,3 @@
-type Orgtree = String;
-
 pub fn is_headline(input: &str) -> bool {
     input.starts_with('*')
 }
