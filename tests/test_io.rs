@@ -66,10 +66,23 @@ fn get_tags_from_all_files_with_exclude_files() {
 
 #[test]
 fn get_tags_from_one_file_that_has_tags() {
+    let project_root_directory = current_dir().unwrap();
+    let org_dir_path = RelativePath::new("/tests/org_files/")
+        .to_path(&project_root_directory)
+        .to_str()
+        .unwrap()
+        .to_string();
+
+    let cfg: Userconfig = Userconfig {
+        org_directory: org_dir_path,
+        exclude_files: None,
+        exclude_pattern: None,
+    };
+
     let file: String = String::from("org_file1.org");
 
     assert_eq!(
-        get_tags_from_file(file),
+        get_tags_from_file(cfg, file),
         Some(vec![
             String::from("bar_file_1"),
             String::from("baz_file_1"),
@@ -83,6 +96,20 @@ fn get_tags_from_one_file_that_has_tags() {
 
 #[test]
 fn get_tags_from_one_file_that_has_no_tags() {
-    let file: String = String::from("org_file_1.org");
-    assert_eq!(get_tags_from_file(file), None)
+    let project_root_directory = current_dir().unwrap();
+    let org_dir_path = RelativePath::new("/tests/org_files/")
+        .to_path(&project_root_directory)
+        .to_str()
+        .unwrap()
+        .to_string();
+
+    let cfg: Userconfig = Userconfig {
+        org_directory: org_dir_path,
+        exclude_files: None,
+        exclude_pattern: None,
+    };
+
+    let file: String = String::from("org_file_with_no_tags.org");
+
+    assert_eq!(get_tags_from_file(cfg, file), None)
 }
