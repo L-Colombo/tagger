@@ -49,6 +49,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "relative-path"
+version = "1.9.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ba39f3699c378cd8970968dcbff9c43159ea4cfbd88d43c00b22f2ef10a435d2"
+
+[[package]]
 name = "serde"
 version = "1.0.219"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -92,6 +98,7 @@ dependencies = [
 name = "tagger"
 version = "0.1.0"
 dependencies = [
+ "relative-path",
  "serde",
  "serde_derive",
  "toml",

@@ -7,3 +7,6 @@ edition = "2024"
 serde = "1.0.219"
 serde_derive = "1.0.219"
 toml = "0.8.20"
+
+[dev-dependencies]
+relative-path = "1.9.3"
