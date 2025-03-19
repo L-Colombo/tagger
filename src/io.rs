@@ -8,6 +8,8 @@ use crate::{
     config::Userconfig,
     orgtree::{get_tags, has_tags, is_headline},
 };
+use minus::{MinusError, Pager, page_all};
+use std::fmt::Write;
 
 pub fn get_all_tags<'a>(cfg: &'a Userconfig) -> Option<Vec<String>> {
     let org_dir_entries = match read_dir(&cfg.org_directory) {
@@ -85,4 +87,23 @@ pub fn get_tags_from_file(cfg: &Userconfig, file_name: String) -> Option<Vec<Str
         true => None,
         false => Some(tags),
     }
+}
+
+pub fn print_tags_to_stdout_or_pager(taglist: Vec<String>) -> Result<(), MinusError> {
+    match taglist.len() <= 20 {
+        true => {
+            for tag in taglist {
+                println!("{tag}")
+            }
+        }
+        false => {
+            let mut output = Pager::new();
+            for tag in taglist {
+                writeln!(output, "{}", tag)?;
+            }
+            page_all(output)?;
+        }
+    }
+
+    Ok(())
 }
