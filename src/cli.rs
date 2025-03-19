@@ -4,7 +4,12 @@ use clap::{Args, Parser, Subcommand};
 // Commands and their arguments
 
 #[derive(Parser)]
-#[command()]
+#[command(name = "tagger")]
+#[command(
+    version,
+    about = "Manage `.org` files' tags from the CLI",
+    long_about = "Search and visualize tags in your `.org` files"
+)]
 pub struct Cli {
     #[command(subcommand)]
     pub command: Commands,
