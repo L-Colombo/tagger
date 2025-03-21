@@ -8,6 +8,7 @@ use crate::{
     config::Userconfig,
     orgtree::{get_tags, has_tags, is_headline},
 };
+use grep::{matcher::Matcher, regex::RegexMatcher};
 use minus::{MinusError, Pager, page_all};
 use std::fmt::Write;
 
@@ -27,6 +28,14 @@ pub fn get_all_tags<'a>(cfg: &'a Userconfig) -> Option<Vec<String>> {
         .filter(|entry| {
             if let Some(exclude) = &cfg.exclude_files {
                 !exclude.contains(&entry)
+            } else {
+                true
+            }
+        })
+        .filter(|entry| {
+            if let Some(pattern) = &cfg.exclude_pattern {
+                let regex = RegexMatcher::new(pattern).unwrap();
+                !regex.is_match(entry.as_bytes()).unwrap()
             } else {
                 true
             }

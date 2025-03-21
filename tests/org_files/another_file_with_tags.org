@@ -1,0 +1,16 @@
+#+FILENAME: Org mode testing file another file
+* This is a headline                                                :foo_another_file:
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
++ unordered list item
++ second unordered list item
+  1) ordered list item
+  2) second ordered list item
+
+** This is a sub-headline with no tags
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+** This is a sub-headline with many tags :foo_another_file:bar_another_file:baz_another_file:
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+** This is a sub-headline with many tags and trailing withespace :trailing_baz_another_file:trailing_foo_another_file:  
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+** This sub-heading: it has many tags and colons which are not tag delimiters :non_delimiters_another_file:
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
