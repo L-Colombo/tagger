@@ -14,6 +14,7 @@ impl Userconfig {
         let cfg_file = &std::fs::read_to_string(cfg_file_name);
 
         let data: Userconfig = match cfg_file {
+            // TODO: better handling in case toml file is malformed
             Ok(file) => toml::from_str(file).unwrap(),
             Err(_) => Userconfig {
                 org_directory: format!("{home_dir}/Documents/Org/"),
