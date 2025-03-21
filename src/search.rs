@@ -11,17 +11,14 @@ pub fn search_tags(pattern: String, cfg: &Userconfig, file: Option<String>) -> O
         Some(file) => get_tags_from_file(&cfg, file),
     };
 
+    let regex: RegexMatcher = RegexMatcher::new(&pattern).unwrap();
+
     match tags {
         None => None,
         Some(taglist) => Some(
             taglist
                 .iter()
-                .filter(|elem| {
-                    RegexMatcher::new(&pattern)
-                        .unwrap()
-                        .is_match(elem.as_bytes())
-                        .unwrap()
-                })
+                .filter(|elem| regex.is_match(elem.as_bytes()).unwrap())
                 .map(|elem| elem.to_owned())
                 .collect(),
         ),
