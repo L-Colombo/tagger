@@ -5,6 +5,8 @@ use crate::{
     io::{get_all_tags, get_tags_from_file},
 };
 
+// PERF: when searching the whole directory, ideally the file(s) in which the tags are found should
+// also be displayed
 pub fn search_tags(pattern: String, cfg: &Userconfig, file: Option<String>) -> Option<Vec<String>> {
     let tags = match file {
         None => get_all_tags(&cfg),
