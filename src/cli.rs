@@ -1,7 +1,9 @@
-use crate::{config::Userconfig, io::*};
+use crate::{config::Userconfig, io::*, search::search_tags};
 use clap::{Args, Parser, Subcommand};
+use minus::MinusError;
 
 // Commands and their arguments
+// Commands
 
 #[derive(Parser)]
 #[command(name = "tagger")]
@@ -17,9 +19,24 @@ pub struct Cli {
 
 #[derive(Debug, Subcommand)]
 pub enum Commands {
+    /// Search tags in Org directory or file
+    #[clap(visible_alias = "s")]
+    Search(SearchArgs),
     /// Print tags to stdout or to pager
     #[clap(visible_aliases = &["t", "tag"])]
     Tags(TagArgs),
+}
+
+// Args
+
+#[derive(Args, Debug)]
+pub struct SearchArgs {
+    /// Pattern used to search for tags
+    #[arg(long, short, value_name = "PATTERN")]
+    pub pattern: String,
+    /// File where to search for tags
+    #[arg(long, short, value_name = "FILE")]
+    pub file: Option<String>,
 }
 
 #[derive(Args, Debug)]
@@ -30,9 +47,19 @@ pub struct TagArgs {
     pub file: Option<String>,
 }
 
-// Functions to be called (wrappers)
+// Wrappers and helpers
 
-pub fn tags_command(args: TagArgs) -> Result<(), minus::MinusError> {
+pub fn search_command(args: SearchArgs) -> Result<(), MinusError> {
+    let cfg: Userconfig = Userconfig::new();
+    match search_tags(args.pattern, &cfg, args.file) {
+        None => println!("No tags matching the provided pattern were found!"),
+        Some(taglist) => print_tags_to_stdout_or_pager(taglist)?,
+    }
+
+    Ok(())
+}
+
+pub fn tags_command(args: TagArgs) -> Result<(), MinusError> {
     let cfg: Userconfig = Userconfig::new();
     match args.file {
         None => match get_all_tags(&cfg) {
