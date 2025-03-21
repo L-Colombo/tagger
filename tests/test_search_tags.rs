@@ -18,14 +18,24 @@ fn search_tags_in_all_files() {
         exclude_pattern: None,
     };
 
-    let pattern: String = String::from("foo");
+    let pattern1: String = String::from("foo");
+    let pattern2: String = String::from("\\w+foo");
 
     assert_eq!(
-        search_tags(pattern, &cfg, None),
+        search_tags(pattern1, &cfg, None),
         Some(vec![
             String::from("foo_another_file"),
             String::from("foo_file_1"),
             String::from("foo_file_2"),
+            String::from("trailing_foo_another_file"),
+            String::from("trailing_foo_file_1"),
+            String::from("trailing_foo_file_2"),
+        ])
+    );
+
+    assert_eq!(
+        search_tags(pattern2, &cfg, None),
+        Some(vec![
             String::from("trailing_foo_another_file"),
             String::from("trailing_foo_file_1"),
             String::from("trailing_foo_file_2"),
@@ -48,13 +58,22 @@ fn search_tags_in_specific_file() {
         exclude_pattern: None,
     };
 
-    let pattern: String = String::from("foo");
-    let file: Option<String> = Some(String::from("org_file1.org"));
+    let pattern1: String = String::from("foo");
+    let pattern2: String = String::from("\\w+foo");
+    const FILE: &str = "org_file1.org";
 
     assert_eq!(
-        search_tags(pattern, &cfg, file),
+        search_tags(pattern1, &cfg, Some(FILE.to_string())),
         Some(vec![
             String::from("foo_file_1"),
+            String::from("trailing_foo_file_1"),
+        ])
+    );
+
+    assert_eq!(
+        search_tags(pattern2, &cfg, Some(FILE.to_string())),
+        Some(vec![
+            //String::from("foo_file_1"),
             String::from("trailing_foo_file_1"),
         ])
     )
