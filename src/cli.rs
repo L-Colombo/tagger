@@ -32,7 +32,7 @@ pub enum Commands {
 #[derive(Args, Debug)]
 pub struct SearchArgs {
     /// Pattern used to search for tags
-    #[arg(long, short, value_name = "PATTERN")]
+    #[arg(value_name = "PATTERN")]
     pub pattern: String,
     /// File where to search for tags
     #[arg(long, short, value_name = "FILE")]
