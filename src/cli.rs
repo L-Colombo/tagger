@@ -1,8 +1,14 @@
 use std::io::Write;
 
 use crate::{config::Userconfig, io::*, refile, search::search_tags};
-use clap::{Args, Parser, Subcommand};
+use clap::{Args, Parser, Subcommand, builder::styling};
 use minus::MinusError;
+
+const STYLES: styling::Styles = styling::Styles::styled()
+    .header(styling::AnsiColor::Green.on_default().bold())
+    .usage(styling::AnsiColor::Green.on_default().bold())
+    .literal(styling::AnsiColor::Blue.on_default().bold())
+    .placeholder(styling::AnsiColor::Cyan.on_default());
 
 // Commands and their arguments
 // Commands
@@ -14,6 +20,7 @@ use minus::MinusError;
     about = "Manage `.org` files' tags from the CLI",
     long_about = "Search and visualize tags in your `.org` files"
 )]
+#[command(styles = STYLES)]
 pub struct Cli {
     #[command(subcommand)]
     pub command: Commands,
