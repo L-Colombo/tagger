@@ -1,3 +1,35 @@
+use crate::config::Userconfig;
+
+#[derive(Debug)]
+pub struct Orgtree {
+    pub file_name: String,
+    pub line_nr: usize,
+    pub lines: Vec<String>,
+}
+
+pub fn get_lines(cfg: &Userconfig, ot: &mut Orgtree) {
+    let file_lines: Vec<String> =
+        std::fs::read_to_string(format!("{}{}", cfg.org_directory, ot.file_name).as_str())
+            .unwrap()
+            .lines()
+            .map(String::from)
+            .collect();
+
+    let line_idx: usize = ot.line_nr;
+    // Get the headline itself
+    ot.lines.push(file_lines[line_idx - 1].clone().to_owned());
+
+    // Get the rest of the lines of the subtree
+    for i in line_idx..file_lines.len() {
+        let current_line = file_lines[i].clone();
+        if current_line.starts_with('*') {
+            break;
+        } else {
+            ot.lines.push(current_line.to_owned());
+        }
+    }
+}
+
 pub fn is_headline(input: &String) -> bool {
     input.starts_with('*')
 }

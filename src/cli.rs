@@ -1,4 +1,6 @@
-use crate::{config::Userconfig, io::*, search::search_tags};
+use std::io::Write;
+
+use crate::{config::Userconfig, io::*, refile, search::search_tags};
 use clap::{Args, Parser, Subcommand};
 use minus::MinusError;
 
@@ -19,6 +21,9 @@ pub struct Cli {
 
 #[derive(Debug, Subcommand)]
 pub enum Commands {
+    /// Refile org trees that have tags that match a pattern
+    #[clap(visible_alias = "r")]
+    Refile(RefileArgs),
     /// Search tags in Org directory or file
     #[clap(visible_alias = "s")]
     Search(SearchArgs),
@@ -28,6 +33,15 @@ pub enum Commands {
 }
 
 // Args
+#[derive(Args, Debug)]
+pub struct RefileArgs {
+    /// Pattern to find Org trees to refile
+    #[arg(value_name = "PATTERN")]
+    pub pattern: String,
+    /// Output file
+    #[arg(value_name = "OUTPUT FILE")]
+    pub output_file: String,
+}
 
 #[derive(Args, Debug)]
 pub struct SearchArgs {
@@ -48,6 +62,20 @@ pub struct TagArgs {
 }
 
 // Wrappers and helpers
+pub fn refile_command(args: RefileArgs) -> Result<(), MinusError> {
+    let cfg: Userconfig = Userconfig::new();
+    let file_contents: String = refile::refile(args.pattern, cfg);
+    let mut output_file = std::fs::OpenOptions::new()
+        .create(true)
+        .truncate(true)
+        .write(true)
+        .open(args.output_file)
+        .unwrap();
+
+    output_file.write_all(file_contents.as_bytes()).unwrap();
+
+    Ok(())
+}
 
 pub fn search_command(args: SearchArgs) -> Result<(), MinusError> {
     let cfg: Userconfig = Userconfig::new();
