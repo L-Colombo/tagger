@@ -1,3 +1,6 @@
+use std::{fs::read_dir, process::exit};
+
+use grep::{matcher::Matcher, regex::RegexMatcher};
 use serde_derive::Deserialize;
 
 #[derive(Deserialize, Debug)]
@@ -35,5 +38,35 @@ impl Userconfig {
             exclude_files: data.exclude_files,
             exclude_pattern: data.exclude_pattern,
         }
+    }
+    pub fn get_files_to_search(&self) -> Vec<String> {
+        let org_dir_entries = match read_dir(&self.org_directory) {
+            Ok(entries) => entries,
+            Err(e) => {
+                println!("Error {}: cannot access your org directory", e);
+                exit(1)
+            }
+        };
+
+        org_dir_entries
+            .map_while(Result::ok)
+            .filter(|entry| !entry.file_type().unwrap().is_dir())
+            .map(|entry| entry.file_name().into_string().unwrap())
+            .filter(|entry| {
+                if let Some(exclude) = &self.exclude_files {
+                    !exclude.contains(&entry)
+                } else {
+                    true
+                }
+            })
+            .filter(|entry| {
+                if let Some(pattern) = &self.exclude_pattern {
+                    let regex = RegexMatcher::new(pattern).unwrap();
+                    !regex.is_match(entry.as_bytes()).unwrap()
+                } else {
+                    true
+                }
+            })
+            .collect()
     }
 }
