@@ -49,6 +49,9 @@ pub struct RefileArgs {
     /// Output file
     #[arg(value_name = "OUTPUT FILE")]
     pub output_file: String,
+    /// Match the pattern strictly or loosely
+    #[arg(short, long, value_name = "STRICT")]
+    pub strict: bool,
 }
 
 #[derive(Args, Debug)]
@@ -72,7 +75,7 @@ pub struct TagArgs {
 // Wrappers and helpers
 pub fn refile_command(args: RefileArgs) -> Result<(), MinusError> {
     let cfg: Userconfig = Userconfig::new();
-    let file_contents: String = refile::refile(args.pattern, cfg);
+    let file_contents: String = refile::refile(args.pattern, cfg, args.strict);
     let mut output_file = std::fs::OpenOptions::new()
         .create(true)
         .truncate(true)

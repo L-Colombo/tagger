@@ -9,8 +9,12 @@ use crate::{config::Userconfig, orgtree::Orgtree};
 
 /// This function returns the refiled files in form of a string.
 /// The `write_refiled_file` in the `io` module will then take care of writing it to a file.
-pub fn refile(pattern: String, cfg: Userconfig) -> String {
-    let raw_pattern = format!(r":\w*{pattern}\w*:");
+pub fn refile(pattern: String, cfg: Userconfig, strict: bool) -> String {
+    let raw_pattern = match strict {
+        false => format!(r":\w*{pattern}\w*:"),
+        true => format!(r":{pattern}:"),
+    };
+
     let files_to_search: Vec<String> = cfg.get_files_to_search();
 
     let mut all_matches: Vec<(String, Vec<usize>)> = vec![];
