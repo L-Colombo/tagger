@@ -11,7 +11,7 @@ use crate::{
 use minus::{MinusError, Pager, page_all};
 use std::fmt::Write;
 
-pub fn get_all_tags<'a>(cfg: &'a Userconfig) -> Option<Vec<String>> {
+pub fn get_all_tags(cfg: &Userconfig) -> Option<Vec<String>> {
     let files_to_search: Vec<String> = cfg.get_files_to_search();
 
     let mut tmp: Vec<Option<Vec<String>>> = vec![];
@@ -22,12 +22,11 @@ pub fn get_all_tags<'a>(cfg: &'a Userconfig) -> Option<Vec<String>> {
 
     let mut tags: Vec<_> = tmp
         .into_iter()
-        .filter(|item| item.is_some())
-        .map(|item| item.unwrap())
+        .flatten()
         .flatten()
         .collect();
 
-    tags.sort_by(|a, b| a.to_lowercase().cmp(&b.to_lowercase()));
+    tags.sort_by_key(|a| a.to_lowercase());
     tags.dedup();
 
     match tags.is_empty() {
@@ -52,16 +51,13 @@ pub fn get_tags_from_file(cfg: &Userconfig, file_name: String) -> Option<Vec<Str
 
     let mut tags: Vec<_> = file_lines
         .map_while(Result::ok)
-        .filter(|line| is_headline(line))
-        .filter(|line| has_tags(line))
-        .map(|taglist| get_tags(&taglist))
-        .filter(|opt| opt.is_some())
-        .map(|some| some.unwrap())
-        .into_iter()
+        .filter(is_headline)
+        .filter(has_tags)
+        .filter_map(|taglist| get_tags(&taglist))
         .flatten()
         .collect();
 
-    tags.sort_by(|a, b| a.to_lowercase().cmp(&b.to_lowercase()));
+    tags.sort_by_key(|a| a.to_lowercase());
     tags.dedup();
 
     match tags.is_empty() {

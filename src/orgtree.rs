@@ -48,7 +48,6 @@ pub fn get_tags(input: &String) -> Option<Vec<String>> {
                 .unwrap()
                 .1
                 .split(':')
-                .into_iter()
                 .filter(|s| !s.is_empty())
                 .map(|str| str.to_string())
                 .collect(),

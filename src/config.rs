@@ -10,6 +10,12 @@ pub struct Userconfig {
     pub exclude_pattern: Option<String>,
 }
 
+impl Default for Userconfig {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Userconfig {
     pub fn new() -> Userconfig {
         let home_dir: String = std::env::var("HOME").unwrap();
@@ -54,7 +60,7 @@ impl Userconfig {
             .map(|entry| entry.file_name().into_string().unwrap())
             .filter(|entry| {
                 if let Some(exclude) = &self.exclude_files {
-                    !exclude.contains(&entry)
+                    !exclude.contains(entry)
                 } else {
                     true
                 }
