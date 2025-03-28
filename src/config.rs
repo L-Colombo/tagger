@@ -1,7 +1,6 @@
-use std::{fs::read_dir, process::exit};
-
 use grep::{matcher::Matcher, regex::RegexMatcher};
 use serde_derive::Deserialize;
+use std::{fs::read_dir, process::exit};
 
 #[derive(Deserialize, Debug)]
 pub struct Userconfig {
@@ -18,13 +17,24 @@ impl Default for Userconfig {
 
 impl Userconfig {
     pub fn new() -> Userconfig {
-        let home_dir: String = std::env::var("HOME").unwrap();
+        let home_dir: String = match std::env::var("HOME") {
+            Ok(home) => home,
+            Err(e) => {
+                eprintln!("{e}: Could not get the path of your $HOME");
+                exit(1)
+            }
+        };
         let cfg_file_name: String = format!("{home_dir}/.config/tagger/tagger.toml");
         let cfg_file = &std::fs::read_to_string(cfg_file_name);
 
         let data: Userconfig = match cfg_file {
-            // TODO: better handling in case toml file is malformed
-            Ok(file) => toml::from_str(file).unwrap(),
+            Ok(file) => match toml::from_str(file) {
+                Ok(cfg) => cfg,
+                Err(e) => {
+                    eprintln!("{e}: Configuration file is possibly malformed");
+                    exit(1)
+                }
+            },
             Err(_) => Userconfig {
                 org_directory: format!("{home_dir}/Documents/Org/"),
                 exclude_files: None,

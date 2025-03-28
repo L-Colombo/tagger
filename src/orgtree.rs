@@ -1,4 +1,5 @@
 use crate::config::Userconfig;
+use std::process::exit;
 
 #[derive(Debug)]
 pub struct Orgtree {
@@ -9,11 +10,13 @@ pub struct Orgtree {
 
 pub fn get_lines(cfg: &Userconfig, ot: &mut Orgtree) {
     let file_lines: Vec<String> =
-        std::fs::read_to_string(format!("{}{}", cfg.org_directory, ot.file_name).as_str())
-            .unwrap()
-            .lines()
-            .map(String::from)
-            .collect();
+        match std::fs::read_to_string(format!("{}{}", cfg.org_directory, ot.file_name).as_str()) {
+            Ok(filestring) => filestring.lines().map(String::from).collect(),
+            Err(e) => {
+                eprintln!("{e}: Could not read file to string");
+                exit(1)
+            }
+        };
 
     let line_idx: usize = ot.line_nr;
     // Get the headline itself
@@ -39,21 +42,20 @@ pub fn has_tags(input: &String) -> bool {
 }
 
 pub fn get_tags(input: &String) -> Option<Vec<String>> {
-    let taglist_opt = match has_tags(&input.trim().to_string()) {
-        false => return None,
+    match has_tags(&input.trim().to_string()) {
+        false => None,
         true => Some(
             input
                 .trim()
                 .rsplit_once(' ')
-                .unwrap()
+                .expect("Some your headlines might be malformed")
                 .1
                 .split(':')
                 .filter(|s| !s.is_empty())
                 .map(|str| str.to_string())
                 .collect(),
         ),
-    };
-    taglist_opt
+    }
 }
 
 #[cfg(test)]

@@ -1,15 +1,14 @@
-use std::{
-    fs::File,
-    io::{self, BufRead},
-    process::exit,
-};
-
 use crate::{
     config::Userconfig,
     orgtree::{get_tags, has_tags, is_headline},
 };
 use minus::{MinusError, Pager, page_all};
 use std::fmt::Write;
+use std::{
+    fs::File,
+    io::{self, BufRead},
+    process::exit,
+};
 
 pub fn get_all_tags(cfg: &Userconfig) -> Option<Vec<String>> {
     let files_to_search: Vec<String> = cfg.get_files_to_search();
@@ -20,11 +19,7 @@ pub fn get_all_tags(cfg: &Userconfig) -> Option<Vec<String>> {
         tmp.push(get_tags_from_file(cfg, file));
     }
 
-    let mut tags: Vec<_> = tmp
-        .into_iter()
-        .flatten()
-        .flatten()
-        .collect();
+    let mut tags: Vec<_> = tmp.into_iter().flatten().flatten().collect();
 
     tags.sort_by_key(|a| a.to_lowercase());
     tags.dedup();

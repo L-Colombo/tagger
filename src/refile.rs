@@ -1,11 +1,9 @@
-use std::fs::File;
-
+use crate::{config::Userconfig, orgtree::Orgtree};
 use grep::{
     regex::RegexMatcher,
     searcher::{Searcher, sinks::UTF8},
 };
-
-use crate::{config::Userconfig, orgtree::Orgtree};
+use std::{fs::File, process::exit};
 
 /// This function returns the refiled files in form of a string.
 /// The `write_refiled_file` in the `io` module will then take care of writing it to a file.
@@ -20,8 +18,21 @@ pub fn refile(pattern: String, cfg: Userconfig, strict: bool) -> String {
     let mut all_matches: Vec<(String, Vec<usize>)> = vec![];
 
     for file in files_to_search {
-        let fname = &File::open(format!("{}{}", cfg.org_directory, file)).unwrap();
-        let matcher = RegexMatcher::new(&raw_pattern).unwrap();
+        let fname = match File::open(format!("{}{}", cfg.org_directory, &file)) {
+            Ok(file) => file,
+            Err(e) => {
+                eprintln!("{}: Could not open file named {}", e, file);
+                exit(1)
+            }
+        };
+
+        let matcher = match RegexMatcher::new(&raw_pattern) {
+            Ok(matecher) => matecher,
+            Err(_) => {
+                eprintln!("Your regex pattern is possibly malformed");
+                exit(1)
+            }
+        };
 
         let mut matches: Vec<usize> = vec![];
 
@@ -70,5 +81,11 @@ pub fn refile(pattern: String, cfg: Userconfig, strict: bool) -> String {
         }
     }
 
-    str_buf.string().unwrap()
+    match str_buf.string() {
+        Ok(str_buf) => str_buf,
+        Err(e) => {
+            eprintln!("{e}: A problem occured getting the contents of your refile file");
+            exit(1)
+        }
+    }
 }

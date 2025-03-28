@@ -1,8 +1,7 @@
-use std::io::Write;
-
 use crate::{config::Userconfig, io::*, refile, search::search_tags};
 use clap::{Args, Parser, Subcommand, builder::styling};
 use minus::MinusError;
+use std::{io::Write, process::exit};
 
 const STYLES: styling::Styles = styling::Styles::styled()
     .header(styling::AnsiColor::Green.on_default().bold())
@@ -81,11 +80,15 @@ pub fn refile_command(args: RefileArgs) -> Result<(), MinusError> {
         .truncate(true)
         .write(true)
         .open(args.output_file)
-        .unwrap();
+        .expect("Something went wrong creating the refiled file");
 
-    output_file.write_all(file_contents.as_bytes()).unwrap();
-
-    Ok(())
+    match output_file.write_all(file_contents.as_bytes()) {
+        Ok(_) => Ok(()),
+        Err(_) => {
+            eprintln!("Could not write the refiled file");
+            exit(1)
+        }
+    }
 }
 
 pub fn search_command(args: SearchArgs) -> Result<(), MinusError> {
