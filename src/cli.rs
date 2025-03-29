@@ -39,7 +39,6 @@ pub enum Commands {
 }
 
 // Args
-//TODO: add strict flag to define wheter there should be a strict match of the pattern
 #[derive(Args, Debug)]
 pub struct RefileArgs {
     /// Pattern to find Org trees to refile
