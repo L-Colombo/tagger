@@ -7,3 +7,8 @@
 * Refile [0%]
 + [ ] Add a ~preview~ flag to output the file to a pager before letting the user decide if saving it or not.
 + [ ] Automatically add the ~.org~ extension if the filename provided by the user does not explicitly have one.
+* Building and release [0%]
++ [ ] Create Makefile to handle installation and documentation
++ [ ] Add ~man~ pages and shell completions scripts.
++ [ ] Make the ~man~ pages and shell completion scripts installable and uninstallable via Makefile
+
