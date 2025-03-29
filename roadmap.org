@@ -1,0 +1,9 @@
+* Locate [0%]
++ [ ] create a ~locate~ command that works similarly to ~search~, but for each tag shows a list of files in which the tag appears.
+* Search [0%]
++ [ ] add a ~pager~ flag to force the output to a pager even if the list is short.
+* Config [0%]
++ [ ] Add an option to have a user-defined minimum length before printing to the pager, if the ~pager~ flag is not passed to ~search~.
+* Refile [0%]
++ [ ] Add a ~preview~ flag to output the file to a pager before letting the user decide if saving it or not.
++ [ ] Automatically add the ~.org~ extension if the filename provided by the user does not explicitly have one.
