@@ -1,0 +1,50 @@
+name: tgr
+description: Manage `.org` files' tags from the CLI
+flags:
+  -h, --help: Print help (see more with '--help')
+  -V, --version: Print version
+commands:
+- name: refile
+  aliases:
+  - r
+  - ref
+  description: Refile org trees that have tags that match a pattern
+  flags:
+    -h, --help: Print help
+    -s, --strict: Match the pattern strictly or loosely
+- name: search
+  aliases:
+  - s
+  description: Search tags in Org directory or file
+  flags:
+    -f, --file=: File where to search for tags
+    -h, --help: Print help
+  completion:
+    flag:
+      file:
+      - $files
+    positional:
+    - []
+- name: tags
+  aliases:
+  - t
+  - tag
+  description: Print tags to stdout or to pager
+  flags:
+    -f, --file=: Optional file to search instead of searching in the whole Org directory
+    -h, --help: Print help
+  completion:
+    flag:
+      file:
+      - $files
+- name: help
+  description: Print this message or the help of the given subcommand(s)
+  commands:
+  - name: refile
+    description: Refile org trees that have tags that match a pattern
+  - name: search
+    description: Search tags in Org directory or file
+  - name: tags
+    description: Print tags to stdout or to pager
+  - name: help
+    description: Print this message or the help of the given subcommand(s)

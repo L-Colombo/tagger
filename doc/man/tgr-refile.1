@@ -1,0 +1,22 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH tgr-refile 1  "tgr-refile " 
+.SH NAME
+tgr\-refile \- Refile org trees that have tags that match a pattern
+.SH SYNOPSIS
+\fBtgr refile\fR [\fB\-s\fR|\fB\-\-strict\fR] [\fB\-h\fR|\fB\-\-help\fR] <\fIPATTERN\fR> <\fIOUTPUT FILE\fR> 
+.SH DESCRIPTION
+Refile org trees that have tags that match a pattern
+.SH OPTIONS
+.TP
+\fB\-s\fR, \fB\-\-strict\fR
+Match the pattern strictly or loosely
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help
+.TP
+<\fIPATTERN\fR>
+Pattern to find Org trees to refile
+.TP
+<\fIOUTPUT FILE\fR>
+Output file
