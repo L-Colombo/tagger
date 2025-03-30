@@ -1,5 +1,5 @@
 use crate::{config::Userconfig, io::*, refile, search::search_tags};
-use clap::{Args, Parser, Subcommand, builder::styling};
+use clap::{Args, Parser, Subcommand, ValueHint, builder::styling};
 use minus::MinusError;
 use std::{io::Write, process::exit};
 
@@ -13,7 +13,7 @@ const STYLES: styling::Styles = styling::Styles::styled()
 // Commands
 
 #[derive(Parser)]
-#[command(name = "tagger")]
+#[command(name = "tgr")]
 #[command(
     version,
     about = "Manage `.org` files' tags from the CLI",
@@ -28,13 +28,13 @@ pub struct Cli {
 #[derive(Debug, Subcommand)]
 pub enum Commands {
     /// Refile org trees that have tags that match a pattern
-    #[clap(visible_alias = "r")]
+    #[clap(aliases = &[ "r", "ref" ])]
     Refile(RefileArgs),
     /// Search tags in Org directory or file
-    #[clap(visible_alias = "s")]
+    #[clap(alias = "s")]
     Search(SearchArgs),
     /// Print tags to stdout or to pager
-    #[clap(visible_aliases = &["t", "tag"])]
+    #[clap(aliases = &["t", "tag"])]
     Tags(TagArgs),
 }
 
@@ -58,7 +58,7 @@ pub struct SearchArgs {
     #[arg(value_name = "PATTERN")]
     pub pattern: String,
     /// File where to search for tags
-    #[arg(long, short, value_name = "FILE")]
+    #[arg(long, short, value_name = "FILE", value_hint = ValueHint::FilePath)]
     pub file: Option<String>,
 }
 
@@ -66,7 +66,7 @@ pub struct SearchArgs {
 #[command(about = "")]
 pub struct TagArgs {
     /// Optional file to search instead of searching in the whole Org directory
-    #[arg(long, short, value_name = "FILE")]
+    #[arg(long, short, value_name = "FILE", value_hint = ValueHint::FilePath)]
     pub file: Option<String>,
 }
 
