@@ -1,3 +1,4 @@
+#+STARTUP: showeverything
 * Locate [0%]
 + [ ] create a ~locate~ command that works similarly to ~search~, but for each tag shows a list of files in which the tag appears.
 * Search [0%]
@@ -6,9 +7,10 @@
 + [ ] Add an option to have a user-defined minimum length before printing to the pager, if the ~pager~ flag is not passed to ~search~.
 * Refile [0%]
 + [ ] Add a ~preview~ flag to output the file to a pager before letting the user decide if saving it or not.
+  + [ ] This includes the development of some sort of pretty print function.
 + [ ] Automatically add the ~.org~ extension if the filename provided by the user does not explicitly have one.
-* Building and release [0%]
-+ [ ] Create Makefile to handle installation and documentation
-+ [ ] Add ~man~ pages and shell completions scripts.
-+ [ ] Make the ~man~ pages and shell completion scripts installable and uninstallable via Makefile
-
++ [ ] Normalize indentation level of all subtrees in refiled files.
+* Building and release [100%]
++ [X] Create Makefile to handle installation and documentation
++ [X] Add ~man~ pages and shell completions scripts.
++ [X] Make the ~man~ pages and shell completion scripts installable and uninstallable via Makefile
