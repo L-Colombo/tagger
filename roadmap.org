@@ -5,6 +5,7 @@
 + [ ] add a ~pager~ flag to force the output to a pager even if the list is short.
 * Config [0%]
 + [ ] Add an option to have a user-defined minimum length before printing to the pager, if the ~pager~ flag is not passed to ~search~.
++ [ ] Add possibility to define an array of exclude patterns
 * Refile [0%]
 + [ ] Add a ~preview~ flag to output the file to a pager before letting the user decide if saving it or not.
   + [ ] This includes the development of some sort of pretty print function.
