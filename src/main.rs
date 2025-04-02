@@ -25,6 +25,6 @@ fn _generate_manpages_and_completions() {
         }
     };
 
-    render_manpages::<Cli>(current_dir.join("doc/man/")).unwrap();
-    render_shell_completions::<Cli>(current_dir.join("doc/shell_comp")).unwrap();
+    render_manpages::<Cli>(current_dir.join("etc/man/")).unwrap();
+    render_shell_completions::<Cli>(current_dir.join("etc/shell_comp")).unwrap();
 }

@@ -20,8 +20,8 @@ build_release:
 install: build_release
 	@echo "Installing $(NAME) version $(VERSION)..."
 	@cp target/release/$(EXEC) $(INSTALL_DIR)
-	@sudo cp doc/shell_comp/_tgr $(ZSH_COMP_DIR)
-	@sudo cp doc/man/{tgr.1,tgr-refile.1,tgr-search.1,tgr-tags.1} $(MAN_DIR)
+	@sudo cp etc/shell_comp/_tgr $(ZSH_COMP_DIR)
+	@sudo cp etc/man/{tgr.1,tgr-refile.1,tgr-search.1,tgr-tags.1} $(MAN_DIR)
 	@echo "$(NAME) version $(VERSION) successfully installed"
 
 uninstall:
