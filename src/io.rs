@@ -61,21 +61,19 @@ pub fn get_tags_from_file(cfg: &Userconfig, file_name: String) -> Option<Vec<Str
     }
 }
 
-pub fn print_tags_to_stdout_or_pager(taglist: Vec<String>) -> Result<(), MinusError> {
-    match taglist.len() <= 20 {
-        true => {
-            for tag in taglist {
-                println!("{tag}")
-            }
-        }
-        false => {
-            let mut output = Pager::new();
-            for tag in taglist {
-                writeln!(output, "{}", tag)?;
-            }
-            page_all(output)?;
-        }
+pub fn print_tags_to_stdout_or_pager(
+    taglist: Vec<String>,
+    force_pager: bool,
+) -> Result<(), MinusError> {
+    let mut output = Pager::new();
+
+    if force_pager {
+        let _ = Pager::set_run_no_overflow(&output, true);
     }
 
-    Ok(())
+    for tag in taglist {
+        writeln!(output, "{}", tag)?;
+    }
+
+    page_all(output)
 }

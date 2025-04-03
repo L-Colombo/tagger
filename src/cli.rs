@@ -60,14 +60,19 @@ pub struct SearchArgs {
     /// File where to search for tags
     #[arg(long, short, value_name = "FILE", value_hint = ValueHint::FilePath)]
     pub file: Option<String>,
+    /// Force the output to a pager
+    #[arg(long, short, value_name = "PAGER")]
+    pub pager: bool,
 }
 
 #[derive(Args, Debug)]
-#[command(about = "")]
 pub struct TagArgs {
     /// Optional file to search instead of searching in the whole Org directory
     #[arg(long, short, value_name = "FILE", value_hint = ValueHint::FilePath)]
     pub file: Option<String>,
+    /// Force the output to a pager
+    #[arg(long, short, value_name = "PAGER")]
+    pub pager: bool,
 }
 
 // Wrappers and helpers
@@ -94,9 +99,8 @@ pub fn search_command(args: SearchArgs) -> Result<(), MinusError> {
     let cfg: Userconfig = Userconfig::new();
     match search_tags(args.pattern, &cfg, args.file) {
         None => println!("No tags matching the provided pattern were found!"),
-        Some(taglist) => print_tags_to_stdout_or_pager(taglist)?,
+        Some(taglist) => print_tags_to_stdout_or_pager(taglist, args.pager)?,
     }
-
     Ok(())
 }
 
@@ -104,11 +108,11 @@ pub fn tags_command(args: TagArgs) -> Result<(), MinusError> {
     let cfg: Userconfig = Userconfig::new();
     match args.file {
         None => match get_all_tags(&cfg) {
-            Some(taglist) => print_tags_to_stdout_or_pager(taglist)?,
+            Some(taglist) => print_tags_to_stdout_or_pager(taglist, args.pager)?,
             None => println!("Could not find any tags in your org directory"),
         },
         Some(file_name) => match get_tags_from_file(&cfg, file_name.clone()) {
-            Some(taglist) => print_tags_to_stdout_or_pager(taglist)?,
+            Some(taglist) => print_tags_to_stdout_or_pager(taglist, args.pager)?,
             None => println!("I have found no tags in file: {}", file_name),
         },
     }
