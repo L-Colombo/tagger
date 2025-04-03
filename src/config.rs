@@ -7,6 +7,7 @@ pub struct Userconfig {
     pub org_directory: String,
     pub exclude_files: Option<Vec<String>>,
     pub exclude_pattern: Option<String>,
+    pub exclude_patterns: Option<Vec<String>>,
 }
 
 impl Default for Userconfig {
@@ -39,6 +40,7 @@ impl Userconfig {
                 org_directory: format!("{home_dir}/Documents/Org/"),
                 exclude_files: None,
                 exclude_pattern: None,
+                exclude_patterns: None,
             },
         };
 
@@ -53,8 +55,10 @@ impl Userconfig {
             },
             exclude_files: data.exclude_files,
             exclude_pattern: data.exclude_pattern,
+            exclude_patterns: data.exclude_patterns,
         }
     }
+
     pub fn get_files_to_search(&self) -> Vec<String> {
         let org_dir_entries = match read_dir(&self.org_directory) {
             Ok(entries) => entries,
@@ -79,6 +83,19 @@ impl Userconfig {
                 if let Some(pattern) = &self.exclude_pattern {
                     let regex = RegexMatcher::new(pattern).unwrap();
                     !regex.is_match(entry.as_bytes()).unwrap()
+                } else {
+                    true
+                }
+            })
+            .filter(|entry| {
+                if let Some(patterns) = &self.exclude_patterns {
+                    for i in patterns.iter() {
+                        let regex = RegexMatcher::new(i).unwrap();
+                        if regex.is_match(entry.as_bytes()).unwrap() {
+                            return false;
+                        }
+                    }
+                    true
                 } else {
                     true
                 }
