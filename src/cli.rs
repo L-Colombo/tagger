@@ -79,11 +79,18 @@ pub struct TagArgs {
 pub fn refile_command(args: RefileArgs) -> Result<(), MinusError> {
     let cfg: Userconfig = Userconfig::new();
     let file_contents: String = refile::refile(args.pattern, cfg, args.strict);
+
+    let fname = if args.output_file.ends_with(".org") {
+        args.output_file
+    } else {
+        format!("{}.org", args.output_file)
+    };
+
     let mut output_file = std::fs::OpenOptions::new()
         .create(true)
         .truncate(true)
         .write(true)
-        .open(args.output_file)
+        .open(fname)
         .expect("Something went wrong creating the refiled file");
 
     match output_file.write_all(file_contents.as_bytes()) {

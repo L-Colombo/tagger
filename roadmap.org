@@ -5,11 +5,11 @@
 + [X] add a ~pager~ flag to force the output to a pager even if the list is short.
 * Config [0%]
 + [ ] Add possibility to define an array of exclude patterns
-* Refile [0%]
+* Refile [25%]
 + [ ] Add a ~preview~ flag to output the file to a pager before letting the user decide if saving it or not.
   + [ ] This includes the development of some sort of pretty print function.
 + [ ] Add a ~temp~ flag to create the file as a temporary file.
-+ [ ] Automatically add the ~.org~ extension if the filename provided by the user does not explicitly have one.
++ [X] Automatically add the ~.org~ extension if the filename provided by the user does not explicitly have one.
 + [ ] Normalize indentation level of all subtrees in refiled files.
 * Building and release [100%]
 + [X] Create Makefile to handle installation and documentation
