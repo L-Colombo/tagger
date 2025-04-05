@@ -16,6 +16,7 @@ fn search_tags_in_all_files() {
         org_directory: org_dir_path,
         exclude_files: None,
         exclude_pattern: None,
+        exclude_patterns: None,
     };
 
     let pattern1: String = String::from("foo");
@@ -56,6 +57,7 @@ fn search_tags_in_specific_file() {
         org_directory: org_dir_path,
         exclude_files: None,
         exclude_pattern: None,
+        exclude_patterns: None,
     };
 
     let pattern1: String = String::from("foo");
