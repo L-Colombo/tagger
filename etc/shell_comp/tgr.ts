@@ -21,6 +21,7 @@ const completion: Fig.Spec = {
         },
         {
           name: "output_file",
+          isOptional: true,
         },
       ]
     },
@@ -37,6 +38,10 @@ const completion: Fig.Spec = {
             isOptional: true,
             template: "filepaths",
           },
+        },
+        {
+          name: ["-p", "--pager"],
+          description: "Force the output to a pager",
         },
         {
           name: ["-h", "--help"],
@@ -60,6 +65,10 @@ const completion: Fig.Spec = {
             isOptional: true,
             template: "filepaths",
           },
+        },
+        {
+          name: ["-p", "--pager"],
+          description: "Force the output to a pager",
         },
         {
           name: ["-h", "--help"],

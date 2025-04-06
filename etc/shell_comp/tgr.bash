@@ -127,7 +127,7 @@ _tgr() {
             return 0
             ;;
         tgr__refile)
-            opts="-s -h --strict --help <PATTERN> <OUTPUT FILE>"
+            opts="-s -h --strict --help <PATTERN> [OUTPUT FILE]"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
@@ -141,7 +141,7 @@ _tgr() {
             return 0
             ;;
         tgr__search)
-            opts="-f -h --file --help <PATTERN>"
+            opts="-f -p -h --file --pager --help <PATTERN>"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
@@ -185,7 +185,7 @@ _tgr() {
             return 0
             ;;
         tgr__tags)
-            opts="-f -h --file --help"
+            opts="-f -p -h --file --pager --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0

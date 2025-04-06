@@ -1,6 +1,7 @@
 use crate::{config::Userconfig, io::*, refile, search::search_tags};
+use bat::PrettyPrinter;
 use clap::{Args, Parser, Subcommand, ValueHint, builder::styling};
-use minus::MinusError;
+use minus::{MinusError, Pager, page_all};
 use std::{io::Write, process::exit};
 
 const STYLES: styling::Styles = styling::Styles::styled()
@@ -44,9 +45,9 @@ pub struct RefileArgs {
     /// Pattern to find Org trees to refile
     #[arg(value_name = "PATTERN")]
     pub pattern: String,
-    /// Output file
+    /// Name of the output file. If not given, ouptut is paged to the console
     #[arg(value_name = "OUTPUT FILE")]
-    pub output_file: String,
+    pub output_file: Option<String>,
     /// Match the pattern strictly or loosely
     #[arg(short, long, value_name = "STRICT")]
     pub strict: bool,
@@ -80,24 +81,40 @@ pub fn refile_command(args: RefileArgs) -> Result<(), MinusError> {
     let cfg: Userconfig = Userconfig::new();
     let file_contents: String = refile::refile(args.pattern, cfg, args.strict);
 
-    let fname = if args.output_file.ends_with(".org") {
-        args.output_file
-    } else {
-        format!("{}.org", args.output_file)
-    };
+    match args.output_file {
+        None => {
+            let mut pager = Pager::new();
 
-    let mut output_file = std::fs::OpenOptions::new()
-        .create(true)
-        .truncate(true)
-        .write(true)
-        .open(fname)
-        .expect("Something went wrong creating the refiled file");
+            let _ = PrettyPrinter::new()
+                .input_from_bytes(file_contents.as_bytes())
+                .language("org")
+                .print_with_writer(Some(&mut pager));
 
-    match output_file.write_all(file_contents.as_bytes()) {
-        Ok(_) => Ok(()),
-        Err(_) => {
-            eprintln!("Could not write the refiled file");
-            exit(1)
+            let _ = Pager::set_run_no_overflow(&pager, true);
+
+            page_all(pager)
+        }
+        Some(output_file) => {
+            let fname = if output_file.ends_with(".org") {
+                output_file
+            } else {
+                format!("{}.org", output_file)
+            };
+
+            let mut output_file = std::fs::OpenOptions::new()
+                .create(true)
+                .truncate(true)
+                .write(true)
+                .open(fname)
+                .expect("Something went wrong creating the refiled file");
+
+            match output_file.write_all(file_contents.as_bytes()) {
+                Ok(_) => Ok(()),
+                Err(_) => {
+                    eprintln!("Could not write the refiled file");
+                    exit(1)
+                }
+            }
         }
     }
 }

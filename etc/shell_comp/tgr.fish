@@ -33,8 +33,10 @@ complete -c tgr -n "__fish_tgr_needs_command" -f -a "help" -d 'Print this messag
 complete -c tgr -n "__fish_tgr_using_subcommand refile" -s s -l strict -d 'Match the pattern strictly or loosely'
 complete -c tgr -n "__fish_tgr_using_subcommand refile" -s h -l help -d 'Print help'
 complete -c tgr -n "__fish_tgr_using_subcommand search" -s f -l file -d 'File where to search for tags' -r -F
+complete -c tgr -n "__fish_tgr_using_subcommand search" -s p -l pager -d 'Force the output to a pager'
 complete -c tgr -n "__fish_tgr_using_subcommand search" -s h -l help -d 'Print help'
 complete -c tgr -n "__fish_tgr_using_subcommand tags" -s f -l file -d 'Optional file to search instead of searching in the whole Org directory' -r -F
+complete -c tgr -n "__fish_tgr_using_subcommand tags" -s p -l pager -d 'Force the output to a pager'
 complete -c tgr -n "__fish_tgr_using_subcommand tags" -s h -l help -d 'Print help'
 complete -c tgr -n "__fish_tgr_using_subcommand help; and not __fish_seen_subcommand_from refile search tags help" -f -a "refile" -d 'Refile org trees that have tags that match a pattern'
 complete -c tgr -n "__fish_tgr_using_subcommand help; and not __fish_seen_subcommand_from refile search tags help" -f -a "search" -d 'Search tags in Org directory or file'

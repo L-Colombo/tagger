@@ -36,12 +36,16 @@ set edit:completion:arg-completer[tgr] = {|@words|
         &'tgr;search'= {
             cand -f 'File where to search for tags'
             cand --file 'File where to search for tags'
+            cand -p 'Force the output to a pager'
+            cand --pager 'Force the output to a pager'
             cand -h 'Print help'
             cand --help 'Print help'
         }
         &'tgr;tags'= {
             cand -f 'Optional file to search instead of searching in the whole Org directory'
             cand --file 'Optional file to search instead of searching in the whole Org directory'
+            cand -p 'Force the output to a pager'
+            cand --pager 'Force the output to a pager'
             cand -h 'Print help'
             cand --help 'Print help'
         }

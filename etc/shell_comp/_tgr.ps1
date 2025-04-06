@@ -41,6 +41,8 @@ Register-ArgumentCompleter -Native -CommandName 'tgr' -ScriptBlock {
         'tgr;search' {
             [CompletionResult]::new('-f', '-f', [CompletionResultType]::ParameterName, 'File where to search for tags')
             [CompletionResult]::new('--file', '--file', [CompletionResultType]::ParameterName, 'File where to search for tags')
+            [CompletionResult]::new('-p', '-p', [CompletionResultType]::ParameterName, 'Force the output to a pager')
+            [CompletionResult]::new('--pager', '--pager', [CompletionResultType]::ParameterName, 'Force the output to a pager')
             [CompletionResult]::new('-h', '-h', [CompletionResultType]::ParameterName, 'Print help')
             [CompletionResult]::new('--help', '--help', [CompletionResultType]::ParameterName, 'Print help')
             break
@@ -48,6 +50,8 @@ Register-ArgumentCompleter -Native -CommandName 'tgr' -ScriptBlock {
         'tgr;tags' {
             [CompletionResult]::new('-f', '-f', [CompletionResultType]::ParameterName, 'Optional file to search instead of searching in the whole Org directory')
             [CompletionResult]::new('--file', '--file', [CompletionResultType]::ParameterName, 'Optional file to search instead of searching in the whole Org directory')
+            [CompletionResult]::new('-p', '-p', [CompletionResultType]::ParameterName, 'Force the output to a pager')
+            [CompletionResult]::new('--pager', '--pager', [CompletionResultType]::ParameterName, 'Force the output to a pager')
             [CompletionResult]::new('-h', '-h', [CompletionResultType]::ParameterName, 'Print help')
             [CompletionResult]::new('--help', '--help', [CompletionResultType]::ParameterName, 'Print help')
             break

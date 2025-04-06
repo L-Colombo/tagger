@@ -9,7 +9,7 @@ module completions {
   # Refile org trees that have tags that match a pattern
   export extern "tgr refile" [
     pattern: string           # Pattern to find Org trees to refile
-    output_file: string       # Output file
+    output_file?: string      # Name of the output file. If not given, ouptut is paged to the console
     --strict(-s)              # Match the pattern strictly or loosely
     --help(-h)                # Print help
   ]
@@ -18,12 +18,14 @@ module completions {
   export extern "tgr search" [
     pattern: string           # Pattern used to search for tags
     --file(-f): path          # File where to search for tags
+    --pager(-p)               # Force the output to a pager
     --help(-h)                # Print help
   ]
 
   # Print tags to stdout or to pager
   export extern "tgr tags" [
     --file(-f): path          # Optional file to search instead of searching in the whole Org directory
+    --pager(-p)               # Force the output to a pager
     --help(-h)                # Print help
   ]
 

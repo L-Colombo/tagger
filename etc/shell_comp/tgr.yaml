@@ -19,6 +19,7 @@ commands:
   flags:
     -f, --file=: File where to search for tags
     -h, --help: Print help
+    -p, --pager: Force the output to a pager
   completion:
     flag:
       file:
@@ -33,6 +34,7 @@ commands:
   flags:
     -f, --file=: Optional file to search instead of searching in the whole Org directory
     -h, --help: Print help
+    -p, --pager: Force the output to a pager
   completion:
     flag:
       file:

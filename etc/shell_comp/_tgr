@@ -35,13 +35,15 @@ _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
 ':pattern -- Pattern to find Org trees to refile:_default' \
-':output_file -- Output file:_default' \
+'::output_file -- Name of the output file. If not given, ouptut is paged to the console:_default' \
 && ret=0
 ;;
 (search)
 _arguments "${_arguments_options[@]}" : \
 '-f+[File where to search for tags]:FILE:_files' \
 '--file=[File where to search for tags]:FILE:_files' \
+'-p[Force the output to a pager]' \
+'--pager[Force the output to a pager]' \
 '-h[Print help]' \
 '--help[Print help]' \
 ':pattern -- Pattern used to search for tags:_default' \
@@ -51,6 +53,8 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 '-f+[Optional file to search instead of searching in the whole Org directory]:FILE:_files' \
 '--file=[Optional file to search instead of searching in the whole Org directory]:FILE:_files' \
+'-p[Force the output to a pager]' \
+'--pager[Force the output to a pager]' \
 '-h[Print help]' \
 '--help[Print help]' \
 && ret=0
