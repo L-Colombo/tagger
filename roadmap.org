@@ -7,8 +7,7 @@
 + [X] Add possibility to define an array of exclude patterns.
 * Refile [25%]
 + [X] Add a ~preview~ flag to output the file to a pager before letting the user decide if saving it or not.
-  + [X] This includes the development of some sort of pretty print function.
-+ [ ] Add a ~temp~ flag to create the file as a temporary file.
+  + [X] This includes the development of some sort of pretty print function (solved using ~bat~'s pretty printer under the Hood).
 + [X] Automatically add the ~.org~ extension if the filename provided by the user does not explicitly have one.
 + [ ] Normalize indentation level of all subtrees in refiled files.
 * Building and release [100%]
