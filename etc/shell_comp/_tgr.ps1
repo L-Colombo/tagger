@@ -32,6 +32,8 @@ Register-ArgumentCompleter -Native -CommandName 'tgr' -ScriptBlock {
             break
         }
         'tgr;refile' {
+            [CompletionResult]::new('-n', '-n', [CompletionResultType]::ParameterName, 'Print the contents to stdout instead of pager')
+            [CompletionResult]::new('--no-pager', '--no-pager', [CompletionResultType]::ParameterName, 'Print the contents to stdout instead of pager')
             [CompletionResult]::new('-s', '-s', [CompletionResultType]::ParameterName, 'Match the pattern strictly or loosely')
             [CompletionResult]::new('--strict', '--strict', [CompletionResultType]::ParameterName, 'Match the pattern strictly or loosely')
             [CompletionResult]::new('-h', '-h', [CompletionResultType]::ParameterName, 'Print help')

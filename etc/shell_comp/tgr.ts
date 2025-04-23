@@ -7,6 +7,10 @@ const completion: Fig.Spec = {
       description: "Refile org trees that have tags that match a pattern",
       options: [
         {
+          name: ["-n", "--no-pager"],
+          description: "Print the contents to stdout instead of pager",
+        },
+        {
           name: ["-s", "--strict"],
           description: "Match the pattern strictly or loosely",
         },

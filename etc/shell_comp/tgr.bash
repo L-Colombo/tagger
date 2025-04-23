@@ -127,7 +127,7 @@ _tgr() {
             return 0
             ;;
         tgr__refile)
-            opts="-s -h --strict --help <PATTERN> [OUTPUT FILE]"
+            opts="-n -s -h --no-pager --strict --help <PATTERN> [OUTPUT FILE]"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0

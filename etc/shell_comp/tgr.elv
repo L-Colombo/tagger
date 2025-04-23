@@ -28,6 +28,8 @@ set edit:completion:arg-completer[tgr] = {|@words|
             cand help 'Print this message or the help of the given subcommand(s)'
         }
         &'tgr;refile'= {
+            cand -n 'Print the contents to stdout instead of pager'
+            cand --no-pager 'Print the contents to stdout instead of pager'
             cand -s 'Match the pattern strictly or loosely'
             cand --strict 'Match the pattern strictly or loosely'
             cand -h 'Print help'

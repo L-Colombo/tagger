@@ -9,6 +9,7 @@ module completions {
   # Refile org trees that have tags that match a pattern
   export extern "tgr refile" [
     pattern: string           # Pattern to find Org trees to refile
+    --no-pager(-n)            # Print the contents to stdout instead of pager
     output_file?: string      # Name of the output file. If not given, ouptut is paged to the console
     --strict(-s)              # Match the pattern strictly or loosely
     --help(-h)                # Print help

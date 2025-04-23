@@ -4,10 +4,13 @@
 .SH NAME
 tgr\-refile \- Refile org trees that have tags that match a pattern
 .SH SYNOPSIS
-\fBtgr refile\fR [\fB\-s\fR|\fB\-\-strict\fR] [\fB\-h\fR|\fB\-\-help\fR] <\fIPATTERN\fR> [\fIOUTPUT FILE\fR] 
+\fBtgr refile\fR [\fB\-n\fR|\fB\-\-no\-pager\fR] [\fB\-s\fR|\fB\-\-strict\fR] [\fB\-h\fR|\fB\-\-help\fR] <\fIPATTERN\fR> [\fIOUTPUT FILE\fR] 
 .SH DESCRIPTION
 Refile org trees that have tags that match a pattern
 .SH OPTIONS
+.TP
+\fB\-n\fR, \fB\-\-no\-pager\fR
+Print the contents to stdout instead of pager
 .TP
 \fB\-s\fR, \fB\-\-strict\fR
 Match the pattern strictly or loosely

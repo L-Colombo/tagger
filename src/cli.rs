@@ -45,6 +45,9 @@ pub struct RefileArgs {
     /// Pattern to find Org trees to refile
     #[arg(value_name = "PATTERN")]
     pub pattern: String,
+    /// Print the contents to stdout instead of pager
+    #[arg(short, long, value_name = "NO PAGER")]
+    pub no_pager: bool,
     /// Name of the output file. If not given, ouptut is paged to the console
     #[arg(value_name = "OUTPUT FILE")]
     pub output_file: Option<String>,
@@ -83,16 +86,21 @@ pub fn refile_command(args: RefileArgs) -> Result<(), MinusError> {
 
     match args.output_file {
         None => {
-            let mut pager = Pager::new();
+            if args.no_pager {
+                println!("{file_contents}");
+                Ok(())
+            } else {
+                let mut pager = Pager::new();
 
-            let _ = PrettyPrinter::new()
-                .input_from_bytes(file_contents.as_bytes())
-                .language("org")
-                .print_with_writer(Some(&mut pager));
+                let _ = PrettyPrinter::new()
+                    .input_from_bytes(file_contents.as_bytes())
+                    .language("org")
+                    .print_with_writer(Some(&mut pager));
 
-            let _ = Pager::set_run_no_overflow(&pager, true);
+                let _ = Pager::set_run_no_overflow(&pager, true);
 
-            page_all(pager)
+                page_all(pager)
+            }
         }
         Some(output_file) => {
             let fname = if output_file.ends_with(".org") {

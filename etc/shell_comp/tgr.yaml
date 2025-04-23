@@ -11,6 +11,7 @@ commands:
   description: Refile org trees that have tags that match a pattern
   flags:
     -h, --help: Print help
+    -n, --no-pager: Print the contents to stdout instead of pager
     -s, --strict: Match the pattern strictly or loosely
 - name: search
   aliases:

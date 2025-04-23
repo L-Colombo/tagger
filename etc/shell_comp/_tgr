@@ -30,6 +30,8 @@ _tgr() {
         case $line[1] in
             (refile)
 _arguments "${_arguments_options[@]}" : \
+'-n[Print the contents to stdout instead of pager]' \
+'--no-pager[Print the contents to stdout instead of pager]' \
 '-s[Match the pattern strictly or loosely]' \
 '--strict[Match the pattern strictly or loosely]' \
 '-h[Print help]' \
