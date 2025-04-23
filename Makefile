@@ -14,7 +14,7 @@ clean:
 
 build_release:
 	@echo "Building $(NAME) version $(VERSION)..."
-	@cargo build --release --quiet
+	@cargo build --release
 	@echo "Finished building $(NAME) version $(VERSION)"
 
 install: build_release
