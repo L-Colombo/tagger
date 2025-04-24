@@ -51,6 +51,7 @@ pub fn refile(pattern: String, cfg: Userconfig, strict: bool) -> String {
     }
 
     let mut org_trees: Vec<Orgtree> = vec![];
+
     for entry in all_matches {
         for line_nr in entry.1 {
             let mut ot = Orgtree {
@@ -63,8 +64,14 @@ pub fn refile(pattern: String, cfg: Userconfig, strict: bool) -> String {
         }
     }
 
+    if org_trees.is_empty() {
+        eprintln!("No matches found for pattern \"{}\"!", pattern);
+        exit(1)
+    }
+
     let mut str_buf = string_builder::Builder::default();
     let mut current_headline = org_trees[0].file_name.clone();
+
     str_buf.append("* ");
     str_buf.append(current_headline.clone());
     str_buf.append("\n");
