@@ -31,10 +31,10 @@ In the configuration file the following options can be declared in toml format:
 
 | Property         | Type     | Description                                                                                                                             |
 |------------------+----------+-----------------------------------------------------------------------------------------------------------------------------------------|
-| org_directory    | String   | Specifies the directory in which tagger searches for files. If not given defaults to ~~/Documents/Org/~                                   |
+| org_directory    | String   | Specifies the directory in which tagger searches for files. If not given defaults to "~/Documents/Org/"                                     |
 | exclude_file     | String   | Specifies one file in which Tagger will not search for tags.                                                                            |
 | exclude_files    | [String] | Specifies an array of files in which Tagger will not search for files.                                                                  |
-| exclude_pattern  | String   | All the files that match the regex pattern are not searched by tagger. Note backslashes need to be escaped (eg: "\\w+")                 |
+| exclude_pattern  | String   | All the files that match the regex pattern are not searched by tagger. Note backslashes need to be escaped (eg: "\\\\w+")               |
 | exclude_patterns | [String] | All the files that match at least one of the regex patterns in the list are not searched by Tagger. Note backslashes need to be escaped |
 
 ** Basic usage
