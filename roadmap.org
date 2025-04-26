@@ -1,6 +1,6 @@
 #+STARTUP: showeverything
 * Locate [0%]
-+ [ ] create a ~locate~ command that works similarly to ~search~, but for each tag shows a list of files in which the tag appears.
++ [X] create a ~locate~ command that works similarly to ~search~, but for each tag shows a list of files in which the tag appears.
 * Search [100%]
 + [X] add a ~pager~ flag to force the output to a pager even if the list is short.
 * Config [100%]
@@ -17,3 +17,5 @@
 + [X] Make the ~man~ pages and shell completion scripts installable and uninstallable via Makefile.
 * Emacs wrapper [0%]
 + [X] Create a wrapper to use it directly from Emacs.
+* Other
++ [ ] Expand test coverage.
