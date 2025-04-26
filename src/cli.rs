@@ -1,6 +1,6 @@
-use crate::{config::Userconfig, io::*, refile, search::search_tags};
+use crate::{config::Userconfig, io::*, locate::locate, refile, search::search_tags};
 use bat::PrettyPrinter;
-use clap::{Args, Parser, Subcommand, ValueHint, builder::styling};
+use clap::{Args, Parser, Subcommand, ValueHint, arg, builder::styling};
 use minus::{MinusError, Pager, page_all};
 use std::{io::Write, process::exit};
 
@@ -28,8 +28,11 @@ pub struct Cli {
 
 #[derive(Debug, Subcommand)]
 pub enum Commands {
+    /// Locate the files that contain a tag matching <PATTERN>
+    #[clap(aliases = &["l", "loc"])]
+    Locate(LocateArgs),
     /// Refile org trees that have tags that match a pattern
-    #[clap(aliases = &[ "r", "ref" ])]
+    #[clap(aliases = &["r", "ref"])]
     Refile(RefileArgs),
     /// Search tags in Org directory or file
     #[clap(alias = "s")]
@@ -40,6 +43,16 @@ pub enum Commands {
 }
 
 // Args
+#[derive(Args, Debug)]
+pub struct LocateArgs {
+    /// Pattern to search for tags
+    #[arg(value_name = "PATTERN")]
+    pub pattern: String,
+    /// Match the pattern strictly or loosely
+    #[arg(short, long, value_name = "STRICT")]
+    pub strict: bool,
+}
+
 #[derive(Args, Debug)]
 pub struct RefileArgs {
     /// Pattern to find Org trees to refile
@@ -80,6 +93,17 @@ pub struct TagArgs {
 }
 
 // Wrappers and helpers
+pub fn locate_command(args: LocateArgs) -> Result<(), MinusError> {
+    let cfg: Userconfig = Userconfig::new();
+    let files: Vec<String> = locate(args.pattern, cfg, args.strict);
+
+    for file in files {
+        println!("{}", file)
+    }
+
+    Ok(())
+}
+
 pub fn refile_command(args: RefileArgs) -> Result<(), MinusError> {
     let cfg: Userconfig = Userconfig::new();
     let file_contents: String = refile::refile(args.pattern, cfg, args.strict);

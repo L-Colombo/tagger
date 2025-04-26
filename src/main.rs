@@ -10,6 +10,7 @@ fn main() -> Result<(), minus::error::MinusError> {
     let cli = Cli::parse();
 
     match cli.command {
+        Commands::Locate(args) => locate_command(args),
         Commands::Refile(args) => refile_command(args),
         Commands::Search(args) => search_command(args),
         Commands::Tags(args) => tags_command(args),
