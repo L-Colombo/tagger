@@ -1,0 +1,19 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH tgr-locate 1  "tgr-locate " 
+.SH NAME
+tgr\-locate \- Locate the files that contain a tag matching <PATTERN>
+.SH SYNOPSIS
+\fBtgr locate\fR [\fB\-s\fR|\fB\-\-strict\fR] [\fB\-h\fR|\fB\-\-help\fR] <\fIPATTERN\fR> 
+.SH DESCRIPTION
+Locate the files that contain a tag matching <PATTERN>
+.SH OPTIONS
+.TP
+\fB\-s\fR, \fB\-\-strict\fR
+Match the pattern strictly or loosely
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help
+.TP
+<\fIPATTERN\fR>
+Pattern to search for tags

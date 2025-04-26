@@ -15,6 +15,9 @@ _tgr() {
             tgr,help)
                 cmd="tgr__help"
                 ;;
+            tgr,locate)
+                cmd="tgr__locate"
+                ;;
             tgr,refile)
                 cmd="tgr__refile"
                 ;;
@@ -26,6 +29,9 @@ _tgr() {
                 ;;
             tgr__help,help)
                 cmd="tgr__help__help"
+                ;;
+            tgr__help,locate)
+                cmd="tgr__help__locate"
                 ;;
             tgr__help,refile)
                 cmd="tgr__help__refile"
@@ -43,7 +49,7 @@ _tgr() {
 
     case "${cmd}" in
         tgr)
-            opts="-h -V --help --version refile search tags help"
+            opts="-h -V --help --version locate refile search tags help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 1 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
@@ -57,7 +63,7 @@ _tgr() {
             return 0
             ;;
         tgr__help)
-            opts="refile search tags help"
+            opts="locate refile search tags help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
@@ -71,6 +77,20 @@ _tgr() {
             return 0
             ;;
         tgr__help__help)
+            opts=""
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                *)
+                    COMPREPLY=()
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        tgr__help__locate)
             opts=""
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
@@ -115,6 +135,20 @@ _tgr() {
         tgr__help__tags)
             opts=""
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                *)
+                    COMPREPLY=()
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        tgr__locate)
+            opts="-s -h --strict --help <PATTERN>"
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi

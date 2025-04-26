@@ -4,6 +4,14 @@ flags:
   -h, --help: Print help (see more with '--help')
   -V, --version: Print version
 commands:
+- name: locate
+  aliases:
+  - l
+  - loc
+  description: Locate the files that contain a tag matching <PATTERN>
+  flags:
+    -h, --help: Print help
+    -s, --strict: Match the pattern strictly or loosely
 - name: refile
   aliases:
   - r
@@ -43,6 +51,8 @@ commands:
 - name: help
   description: Print this message or the help of the given subcommand(s)
   commands:
+  - name: locate
+    description: Locate the files that contain a tag matching <PATTERN>
   - name: refile
     description: Refile org trees that have tags that match a pattern
   - name: search

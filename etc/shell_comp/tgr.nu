@@ -6,6 +6,13 @@ module completions {
     --version(-V)             # Print version
   ]
 
+  # Locate the files that contain a tag matching <PATTERN>
+  export extern "tgr locate" [
+    pattern: string           # Pattern to search for tags
+    --strict(-s)              # Match the pattern strictly or loosely
+    --help(-h)                # Print help
+  ]
+
   # Refile org trees that have tags that match a pattern
   export extern "tgr refile" [
     pattern: string           # Pattern to find Org trees to refile
@@ -32,6 +39,10 @@ module completions {
 
   # Print this message or the help of the given subcommand(s)
   export extern "tgr help" [
+  ]
+
+  # Locate the files that contain a tag matching <PATTERN>
+  export extern "tgr help locate" [
   ]
 
   # Refile org trees that have tags that match a pattern

@@ -3,6 +3,23 @@ const completion: Fig.Spec = {
   description: "Manage `.org` files' tags from the CLI",
   subcommands: [
     {
+      name: ["locate", "l", "loc"],
+      description: "Locate the files that contain a tag matching <PATTERN>",
+      options: [
+        {
+          name: ["-s", "--strict"],
+          description: "Match the pattern strictly or loosely",
+        },
+        {
+          name: ["-h", "--help"],
+          description: "Print help",
+        },
+      ],
+      args: {
+        name: "pattern",
+      },
+    },
+    {
       name: ["refile", "r", "ref"],
       description: "Refile org trees that have tags that match a pattern",
       options: [
@@ -84,6 +101,10 @@ const completion: Fig.Spec = {
       name: "help",
       description: "Print this message or the help of the given subcommand(s)",
       subcommands: [
+        {
+          name: "locate",
+          description: "Locate the files that contain a tag matching <PATTERN>",
+        },
         {
           name: "refile",
           description: "Refile org trees that have tags that match a pattern",

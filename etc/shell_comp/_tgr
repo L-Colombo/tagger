@@ -28,7 +28,16 @@ _tgr() {
         (( CURRENT += 1 ))
         curcontext="${curcontext%:*:*}:tgr-command-$line[1]:"
         case $line[1] in
-            (refile)
+            (locate)
+_arguments "${_arguments_options[@]}" : \
+'-s[Match the pattern strictly or loosely]' \
+'--strict[Match the pattern strictly or loosely]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':pattern -- Pattern to search for tags:_default' \
+&& ret=0
+;;
+(refile)
 _arguments "${_arguments_options[@]}" : \
 '-n[Print the contents to stdout instead of pager]' \
 '--no-pager[Print the contents to stdout instead of pager]' \
@@ -73,7 +82,11 @@ _arguments "${_arguments_options[@]}" : \
         (( CURRENT += 1 ))
         curcontext="${curcontext%:*:*}:tgr-help-command-$line[1]:"
         case $line[1] in
-            (refile)
+            (locate)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(refile)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
@@ -101,6 +114,7 @@ esac
 (( $+functions[_tgr_commands] )) ||
 _tgr_commands() {
     local commands; commands=(
+'locate:Locate the files that contain a tag matching <PATTERN>' \
 'refile:Refile org trees that have tags that match a pattern' \
 'search:Search tags in Org directory or file' \
 'tags:Print tags to stdout or to pager' \
@@ -111,6 +125,7 @@ _tgr_commands() {
 (( $+functions[_tgr__help_commands] )) ||
 _tgr__help_commands() {
     local commands; commands=(
+'locate:Locate the files that contain a tag matching <PATTERN>' \
 'refile:Refile org trees that have tags that match a pattern' \
 'search:Search tags in Org directory or file' \
 'tags:Print tags to stdout or to pager' \
@@ -122,6 +137,11 @@ _tgr__help_commands() {
 _tgr__help__help_commands() {
     local commands; commands=()
     _describe -t commands 'tgr help help commands' commands "$@"
+}
+(( $+functions[_tgr__help__locate_commands] )) ||
+_tgr__help__locate_commands() {
+    local commands; commands=()
+    _describe -t commands 'tgr help locate commands' commands "$@"
 }
 (( $+functions[_tgr__help__refile_commands] )) ||
 _tgr__help__refile_commands() {
@@ -137,6 +157,11 @@ _tgr__help__search_commands() {
 _tgr__help__tags_commands() {
     local commands; commands=()
     _describe -t commands 'tgr help tags commands' commands "$@"
+}
+(( $+functions[_tgr__locate_commands] )) ||
+_tgr__locate_commands() {
+    local commands; commands=()
+    _describe -t commands 'tgr locate commands' commands "$@"
 }
 (( $+functions[_tgr__refile_commands] )) ||
 _tgr__refile_commands() {

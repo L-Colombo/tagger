@@ -25,10 +25,18 @@ Register-ArgumentCompleter -Native -CommandName 'tgr' -ScriptBlock {
             [CompletionResult]::new('--help', '--help', [CompletionResultType]::ParameterName, 'Print help (see more with ''--help'')')
             [CompletionResult]::new('-V', '-V ', [CompletionResultType]::ParameterName, 'Print version')
             [CompletionResult]::new('--version', '--version', [CompletionResultType]::ParameterName, 'Print version')
+            [CompletionResult]::new('locate', 'locate', [CompletionResultType]::ParameterValue, 'Locate the files that contain a tag matching <PATTERN>')
             [CompletionResult]::new('refile', 'refile', [CompletionResultType]::ParameterValue, 'Refile org trees that have tags that match a pattern')
             [CompletionResult]::new('search', 'search', [CompletionResultType]::ParameterValue, 'Search tags in Org directory or file')
             [CompletionResult]::new('tags', 'tags', [CompletionResultType]::ParameterValue, 'Print tags to stdout or to pager')
             [CompletionResult]::new('help', 'help', [CompletionResultType]::ParameterValue, 'Print this message or the help of the given subcommand(s)')
+            break
+        }
+        'tgr;locate' {
+            [CompletionResult]::new('-s', '-s', [CompletionResultType]::ParameterName, 'Match the pattern strictly or loosely')
+            [CompletionResult]::new('--strict', '--strict', [CompletionResultType]::ParameterName, 'Match the pattern strictly or loosely')
+            [CompletionResult]::new('-h', '-h', [CompletionResultType]::ParameterName, 'Print help')
+            [CompletionResult]::new('--help', '--help', [CompletionResultType]::ParameterName, 'Print help')
             break
         }
         'tgr;refile' {
@@ -59,10 +67,14 @@ Register-ArgumentCompleter -Native -CommandName 'tgr' -ScriptBlock {
             break
         }
         'tgr;help' {
+            [CompletionResult]::new('locate', 'locate', [CompletionResultType]::ParameterValue, 'Locate the files that contain a tag matching <PATTERN>')
             [CompletionResult]::new('refile', 'refile', [CompletionResultType]::ParameterValue, 'Refile org trees that have tags that match a pattern')
             [CompletionResult]::new('search', 'search', [CompletionResultType]::ParameterValue, 'Search tags in Org directory or file')
             [CompletionResult]::new('tags', 'tags', [CompletionResultType]::ParameterValue, 'Print tags to stdout or to pager')
             [CompletionResult]::new('help', 'help', [CompletionResultType]::ParameterValue, 'Print this message or the help of the given subcommand(s)')
+            break
+        }
+        'tgr;help;locate' {
             break
         }
         'tgr;help;refile' {
