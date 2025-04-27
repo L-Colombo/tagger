@@ -49,3 +49,5 @@ I have also created a wrapper to use Tagger directly from inside Emacs, which yo
 
 ** Contribute
 Feel free to send pull requests or open issues.
+
+Feel also free to suggest features to add in the [[./roadmap.org][roadmap]].
