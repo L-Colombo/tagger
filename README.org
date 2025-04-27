@@ -1,6 +1,6 @@
 * Tagger
 
-Tagger is a small command line utility fo explore and work with the tags of your [[https://orgmode.org/][Org-Mode]] files written in the Rust programming language.
+Tagger is a small command line utility to explore and work with the tags of your [[https://orgmode.org/][Org-Mode]] files written in the Rust programming language.
 Under the hood, it leverages the power of the [[https://github.com/BurntSushi/ripgrep][ripgrep]] and [[https://github.com/sharkdp/bat][bat]] crates.
 
 ** Rationale
