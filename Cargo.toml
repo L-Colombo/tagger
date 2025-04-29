@@ -21,3 +21,7 @@ relative-path = "1.9.3"
 [[bin]]
 name = "tgr"
 path = "src/main.rs"
+
+[profile.release]
+codegen-units = 1
+lto = true
