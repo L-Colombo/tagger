@@ -73,32 +73,32 @@ mod tests {
     #[test]
     fn is_headline_expect_true() {
         let input = "* This is a headline".to_string();
-        assert_eq!(true, is_headline(&input))
+        assert_eq!(is_headline(&input), true)
     }
 
     // TEST GET_TAGS
     #[test]
     fn headline_has_no_tags() {
         let input = "* I have no tags".to_string();
-        assert_eq!(None, get_tags(&input))
+        assert_eq!(get_tags(&input), None)
     }
 
     #[test]
     fn headline_has_one_tag() {
         let input = "* I have one tag :foo:".to_string();
-        assert_eq!(Some(vec!["foo".to_string()]), get_tags(&input))
+        assert_eq!(get_tags(&input), Some(vec!["foo".to_string()]))
     }
 
     #[test]
     fn headline_has_many_tags() {
         let input = "* I have many tags :foo:bar:baz:".to_string();
         assert_eq!(
+            get_tags(&input),
             Some(vec![
                 "foo".to_string(),
                 "bar".to_string(),
                 "baz".to_string()
-            ]),
-            get_tags(&input)
+            ])
         )
     }
 
@@ -106,12 +106,12 @@ mod tests {
     fn headline_has_colons_not_tag_delim() {
         let input = "* What I have: many tags :foo:bar:baz:".to_string();
         assert_eq!(
+            get_tags(&input),
             Some(vec![
                 "foo".to_string(),
                 "bar".to_string(),
                 "baz".to_string()
-            ]),
-            get_tags(&input)
+            ])
         )
     }
 
@@ -119,12 +119,12 @@ mod tests {
     fn headline_has_colons_not_tag_delim_and_trailing_whitespace() {
         let input = "* What I have: many tags :foo:bar:baz: ".to_string();
         assert_eq!(
+            get_tags(&input),
             Some(vec![
                 "foo".to_string(),
                 "bar".to_string(),
                 "baz".to_string()
-            ]),
-            get_tags(&input)
+            ])
         )
     }
 }
