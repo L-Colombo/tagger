@@ -3,8 +3,9 @@
 + [X] create a ~locate~ command that works similarly to ~search~, but for each tag shows a list of files in which the tag appears.
 * Search [100%]
 + [X] add a ~pager~ flag to force the output to a pager even if the list is short.
-* Config [100%]
+* Config [50%]
 + [X] Add possibility to define an array of exclude patterns.
++ [ ] Add possibility to declare the ~org-directory~ at runtime (for every sub command) via a ~-d~ flag.
 * Refile [50%]
 + [X] Add a ~preview~ flag to output the file to a pager before letting the user decide if saving it or not.
   + [X] This includes the development of some sort of pretty print function (solved using ~bat~'s pretty printer under the Hood).
