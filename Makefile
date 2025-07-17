@@ -1,4 +1,4 @@
-VERSION=v0.1.1
+VERSION=v0.1.2
 NAME=tagger
 EXEC=tgr
 INSTALL_DIR=$(HOME)/.local/bin
