@@ -35,8 +35,7 @@ pub fn get_tags_from_file(cfg: &Userconfig, file_name: String) -> Option<Vec<Str
         Ok(file) => file,
         Err(e) => {
             eprintln!(
-                "Error {}: file named `{}` does not exist in your org directory",
-                e, file_name
+                "Error {e}: file named `{file_name}` does not exist in your org directory"
             );
             exit(1)
         }
@@ -72,7 +71,7 @@ pub fn print_tags_to_stdout_or_pager(
     }
 
     for tag in taglist {
-        writeln!(output, "{}", tag)?;
+        writeln!(output, "{tag}")?;
     }
 
     page_all(output)

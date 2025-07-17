@@ -19,7 +19,7 @@ pub fn locate(pattern: String, cfg: Userconfig, strict: bool) -> Vec<String> {
         let fname = match File::open(format!("{}{}", cfg.org_directory, &file)) {
             Ok(file) => file,
             Err(e) => {
-                eprintln!("{}: Could not open file named {}", e, file);
+                eprintln!("{e}: Could not open file named {file}");
                 exit(1)
             }
         };

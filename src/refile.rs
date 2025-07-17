@@ -21,7 +21,7 @@ pub fn refile(pattern: String, cfg: Userconfig, strict: bool) -> String {
         let fname = match File::open(format!("{}{}", cfg.org_directory, &file)) {
             Ok(file) => file,
             Err(e) => {
-                eprintln!("{}: Could not open file named {}", e, file);
+                eprintln!("{e}: Could not open file named {file}");
                 exit(1)
             }
         };
@@ -65,7 +65,7 @@ pub fn refile(pattern: String, cfg: Userconfig, strict: bool) -> String {
     }
 
     if org_trees.is_empty() {
-        eprintln!("No matches found for pattern \"{}\"!", pattern);
+        eprintln!("No matches found for pattern \"{pattern}\"!");
         exit(1)
     }
 

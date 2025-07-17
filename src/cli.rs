@@ -98,7 +98,7 @@ pub fn locate_command(args: LocateArgs) -> Result<(), MinusError> {
     let files: Vec<String> = locate(args.pattern, cfg, args.strict);
 
     for file in files {
-        println!("{}", file)
+        println!("{file}")
     }
 
     Ok(())
@@ -130,7 +130,7 @@ pub fn refile_command(args: RefileArgs) -> Result<(), MinusError> {
             let fname = if output_file.ends_with(".org") {
                 output_file
             } else {
-                format!("{}.org", output_file)
+                format!("{output_file}.org")
             };
 
             let mut output_file = std::fs::OpenOptions::new()
@@ -169,7 +169,7 @@ pub fn tags_command(args: TagArgs) -> Result<(), MinusError> {
         },
         Some(file_name) => match get_tags_from_file(&cfg, file_name.clone()) {
             Some(taglist) => print_tags_to_stdout_or_pager(taglist, args.pager)?,
-            None => println!("I have found no tags in file: {}", file_name),
+            None => println!("I have found no tags in file: {file_name}"),
         },
     }
     Ok(())

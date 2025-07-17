@@ -47,8 +47,8 @@ impl Userconfig {
         Userconfig {
             org_directory: {
                 if data.org_directory.starts_with('~') {
-                    let expanded_orgdir_path = data.org_directory.replace('~', home_dir.as_str());
-                    expanded_orgdir_path
+                    
+                    data.org_directory.replace('~', home_dir.as_str())
                 } else {
                     data.org_directory
                 }
@@ -63,7 +63,7 @@ impl Userconfig {
         let org_dir_entries = match read_dir(&self.org_directory) {
             Ok(entries) => entries,
             Err(e) => {
-                println!("Error {}: cannot access your org directory", e);
+                println!("Error {e}: cannot access your org directory");
                 exit(1)
             }
         };
