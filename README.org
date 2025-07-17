@@ -25,7 +25,7 @@ Tagger can be uninstalled running in the project's directory ~make uninstall~.
 
 ** Configuration
 
-The configuration is done in ~~/.config/tagger/tagger.toml~.
+The configuration is done in */.config/tagger/tagger.toml*.
 
 In the configuration file the following options can be declared in toml format:
 
