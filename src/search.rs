@@ -3,6 +3,7 @@ use crate::{
     io::{get_all_tags, get_tags_from_file},
 };
 use grep::{matcher::Matcher, regex::RegexMatcher};
+use rayon::prelude::*;
 use std::process::exit;
 
 pub fn search_tags(pattern: String, cfg: &Userconfig, file: Option<String>) -> Option<Vec<String>> {
@@ -21,7 +22,7 @@ pub fn search_tags(pattern: String, cfg: &Userconfig, file: Option<String>) -> O
 
     tags.map(|taglist| {
         taglist
-            .iter()
+            .par_iter()
             .filter(|elem| match regex.is_match(elem.as_bytes()) {
                 Ok(match_result) => match_result,
                 Err(e) => {

@@ -3,6 +3,7 @@ use crate::{
     orgtree::{get_tags, has_tags, is_headline},
 };
 use minus::{MinusError, Pager, page_all};
+use rayon::prelude::*;
 use std::fmt::Write;
 use std::{
     fs::File,
@@ -19,7 +20,7 @@ pub fn get_all_tags(cfg: &Userconfig) -> Option<Vec<String>> {
         tmp.push(get_tags_from_file(cfg, file));
     }
 
-    let mut tags: Vec<_> = tmp.into_iter().flatten().flatten().collect();
+    let mut tags: Vec<_> = tmp.into_par_iter().flatten().flatten().collect();
 
     tags.sort_by_key(|a| a.to_lowercase());
     tags.dedup();
@@ -34,9 +35,7 @@ pub fn get_tags_from_file(cfg: &Userconfig, file_name: String) -> Option<Vec<Str
     let file = match File::open(format!("{}/{}", cfg.org_directory, file_name)) {
         Ok(file) => file,
         Err(e) => {
-            eprintln!(
-                "Error {e}: file named `{file_name}` does not exist in your org directory"
-            );
+            eprintln!("Error {e}: file named `{file_name}` does not exist in your org directory");
             exit(1)
         }
     };

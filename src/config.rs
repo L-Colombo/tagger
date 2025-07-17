@@ -47,7 +47,6 @@ impl Userconfig {
         Userconfig {
             org_directory: {
                 if data.org_directory.starts_with('~') {
-                    
                     data.org_directory.replace('~', home_dir.as_str())
                 } else {
                     data.org_directory
