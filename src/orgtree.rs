@@ -22,13 +22,11 @@ pub fn get_lines(cfg: &Userconfig, ot: &mut Orgtree) {
     // Get the headline itself
     ot.lines.push(file_lines[line_idx - 1].clone().to_owned());
 
-    // Get the rest of the lines of the subtree
-    for i in line_idx..file_lines.len() {
-        let current_line = file_lines[i].clone();
-        if current_line.starts_with('*') {
+    for i in file_lines.iter().skip(line_idx) {
+        if is_headline(i) {
             break;
         } else {
-            ot.lines.push(current_line.to_owned());
+            ot.lines.push(i.to_owned());
         }
     }
 }
