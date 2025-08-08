@@ -6,7 +6,7 @@ Under the hood, it leverages the power of the [[https://github.com/BurntSushi/ri
 ** Rationale
 
 I use Org-Mode every day in my academic job to take literature note and sketch notes for essays.
-In doing so, I make extensive use tags (thousands of them) spread over dozens of files.
+In doing so, I make extensive use of tags (thousands of them) spread over dozens of files.
 When dealing with so many tags, it often becomes cumbersome to find specific tags, list all of them, locate them inside files and producing a file which aggregates all the subheadings that contain a given tag.
 
 That's why I created ~tagger~, a fast and easy-to-use command line program to list, search, locate and refile based on a specific tag.
@@ -19,13 +19,13 @@ In the =etc/= directory there are completion scripts for other shells that, if n
 
 You will need the Rust toolchain to compile the program (you can get it [[https://www.rust-lang.org/tools/install][here]]).
 
-You might want to check the Makefile and tweak it to your liking before ~make install~.
+You might want to check the Makefile and tweak it to your liking before running ~make install~.
 
 Tagger can be uninstalled running in the project's directory ~make uninstall~.
 
 ** Configuration
 
-The configuration is done in */.config/tagger/tagger.toml*.
+The configuration is done in ~$HOME/.config/tagger/tagger.toml~.
 
 In the configuration file the following options can be declared in toml format:
 
