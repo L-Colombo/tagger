@@ -5,15 +5,15 @@ edition = "2024"
 
 [dependencies]
 bat = { version = "0.25.0", default-features = false, features = ["regex-fancy"] }
-clap = { version = "4.5.32", features = ["derive"] }
+clap = { version = "4.5.46", features = ["derive"] }
 clap_allgen = "0.2.1"
 grep = "0.3.2"
 minus = { version = "5.6.1", features = ["regex", "search", "static_output"] }
-rayon = "1.10.0"
+rayon = "1.11.0"
 serde = "1.0.219"
 serde_derive = "1.0.219"
 string-builder = "0.2.0"
-toml = "0.9.2"
+toml = "0.9.5"
 
 [dev-dependencies]
 pretty_assertions = "1.4.1"
