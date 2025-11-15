@@ -5,13 +5,15 @@
 + [X] add a ~pager~ flag to force the output to a pager even if the list is short.
 * Config [50%]
 + [X] Add possibility to define an array of exclude patterns.
-+ [ ] Add possibility to declare the ~org-directory~ at runtime (for every sub command) via a ~-d~ flag.
 * Refile [50%]
 + [X] Add a ~preview~ flag to output the file to a pager before letting the user decide if saving it or not.
   + [X] This includes the development of some sort of pretty print function (solved using ~bat~'s pretty printer under the Hood).
 + [X] Automatically add the ~.org~ extension if the filename provided by the user does not explicitly have one.
 + [ ] Normalize indentation level of all subtrees in refiled files.
 + [ ] Improve the handling of nested subtrees.
+* Runtime
++ [ ] Add possibility to declare the ~org-directory~ at runtime (for every sub command) via a ~-d~ flag.
++ [ ] Add ~--exclude=<pattern>~ and ~--include=<pattern>~ to override at runtime the files to be searched.
 * Building and release [100%]
 + [X] Create Makefile to handle installation and documentation.
 + [X] Add ~man~ pages and shell completions scripts.
