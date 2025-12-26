@@ -11,6 +11,7 @@
 + [X] Automatically add the ~.org~ extension if the filename provided by the user does not explicitly have one.
 + [ ] Normalize indentation level of all subtrees in refiled files.
 + [ ] Improve the handling of nested subtrees.
++ [ ] Add possibility to refile headlines that match more than one tag
 * Runtime
 + [ ] Add possibility to declare the ~org-directory~ at runtime (for every sub command) via a ~-d~ flag.
 + [ ] Add ~--exclude=<pattern>~ and ~--include=<pattern>~ to override at runtime the files to be searched.
