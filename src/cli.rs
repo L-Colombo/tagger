@@ -1,6 +1,6 @@
 use crate::{config::Userconfig, io::*, locate::locate, refile, search::search_tags};
 use bat::PrettyPrinter;
-use clap::{Args, Parser, Subcommand, ValueHint, arg, builder::styling};
+use clap::{Args, Parser, Subcommand, ValueHint, builder::styling};
 use minus::{MinusError, Pager, page_all};
 use std::{io::Write, process::exit};
 
