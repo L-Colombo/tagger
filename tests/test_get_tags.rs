@@ -15,7 +15,7 @@ fn get_tags_from_all_files() {
         .unwrap()
         .to_string();
 
-    let cfg: Userconfig = Userconfig {
+    let mut cfg: Userconfig = Userconfig {
         org_directory: org_dir_path,
         exclude_files: None,
         exclude_pattern: None,
@@ -23,7 +23,7 @@ fn get_tags_from_all_files() {
     };
 
     assert_eq!(
-        get_all_tags(&cfg),
+        get_all_tags(&mut cfg),
         Some(vec![
             String::from("bar_another_file"),
             String::from("bar_file_1"),
@@ -56,7 +56,7 @@ fn get_tags_from_all_files_with_exclude_files() {
         .unwrap()
         .to_string();
 
-    let cfg: Userconfig = Userconfig {
+    let mut cfg: Userconfig = Userconfig {
         org_directory: org_dir_path,
         exclude_files: Some(vec![String::from("org_file2.org")]),
         exclude_pattern: None,
@@ -64,7 +64,7 @@ fn get_tags_from_all_files_with_exclude_files() {
     };
 
     assert_eq!(
-        get_all_tags(&cfg),
+        get_all_tags(&mut cfg),
         Some(vec![
             String::from("bar_another_file"),
             String::from("bar_file_1"),
@@ -91,7 +91,7 @@ fn get_tags_from_all_files_with_exclude_pattern() {
         .unwrap()
         .to_string();
 
-    let cfg: Userconfig = Userconfig {
+    let mut cfg: Userconfig = Userconfig {
         org_directory: org_dir_path,
         exclude_files: None,
         exclude_pattern: Some(r"another\w*".to_string()),
@@ -99,7 +99,7 @@ fn get_tags_from_all_files_with_exclude_pattern() {
     };
 
     assert_eq!(
-        get_all_tags(&cfg),
+        get_all_tags(&mut cfg),
         Some(vec![
             String::from("bar_file_1"),
             String::from("bar_file_2"),
@@ -126,7 +126,7 @@ fn get_tags_from_all_files_with_exclude_pattern_and_exclude_files() {
         .unwrap()
         .to_string();
 
-    let cfg: Userconfig = Userconfig {
+    let mut cfg: Userconfig = Userconfig {
         org_directory: org_dir_path,
         exclude_files: Some(vec![String::from("org_file2.org")]),
         exclude_pattern: Some(String::from("another\\w*")),
@@ -134,7 +134,7 @@ fn get_tags_from_all_files_with_exclude_pattern_and_exclude_files() {
     };
 
     assert_eq!(
-        get_all_tags(&cfg),
+        get_all_tags(&mut cfg),
         Some(vec![
             String::from("bar_file_1"),
             String::from("baz_file_1"),
@@ -155,7 +155,7 @@ fn get_tags_from_all_files_with_exclude_patterns() {
         .unwrap()
         .to_string();
 
-    let cfg: Userconfig = Userconfig {
+    let mut cfg: Userconfig = Userconfig {
         org_directory: org_dir_path,
         exclude_files: None,
         exclude_pattern: None,
@@ -163,7 +163,7 @@ fn get_tags_from_all_files_with_exclude_patterns() {
     };
 
     assert_eq!(
-        get_all_tags(&cfg),
+        get_all_tags(&mut cfg),
         Some(vec![
             String::from("bar_another_file"),
             String::from("baz_another_file"),

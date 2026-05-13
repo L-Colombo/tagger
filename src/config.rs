@@ -58,7 +58,13 @@ impl Userconfig {
         }
     }
 
-    pub fn get_files_to_search(&self) -> Vec<String> {
+    pub fn get_files_to_search(
+        &mut self,
+        // To override the config at runtime adding a pattern to include
+        include: Option<String>,
+        // To override the config at runtime adding a pattern to exclude
+        exclude: Option<String>,
+    ) -> Vec<String> {
         let org_dir_entries = match read_dir(&self.org_directory) {
             Ok(entries) => entries,
             Err(e) => {
@@ -72,8 +78,8 @@ impl Userconfig {
             .filter(|entry| !entry.file_type().unwrap().is_dir())
             .map(|entry| entry.file_name().into_string().unwrap())
             .filter(|entry| {
-                if let Some(exclude) = &self.exclude_files {
-                    !exclude.contains(entry)
+                if let Some(exclude_files) = &self.exclude_files {
+                    !exclude_files.contains(entry)
                 } else {
                     true
                 }
@@ -87,13 +93,22 @@ impl Userconfig {
                 }
             })
             .filter(|entry| {
-                if let Some(patterns) = &self.exclude_patterns {
-                    for i in patterns.iter() {
+                if let Some(exclude_patterns) = &mut self.exclude_patterns {
+                    if let Some(exclude) = &exclude {
+                        exclude_patterns.push(exclude.to_string());
+                    }
+
+                    if let Some(include) = &include {
+                        exclude_patterns.pop_if(|x| x == include);
+                    }
+
+                    for i in exclude_patterns.iter() {
                         let regex = RegexMatcher::new(i).unwrap();
                         if regex.is_match(entry.as_bytes()).unwrap() {
                             return false;
                         }
                     }
+
                     true
                 } else {
                     true

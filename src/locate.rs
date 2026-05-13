@@ -1,17 +1,17 @@
-use crate::config::Userconfig;
+use crate::{cli::LocateArgs, config::Userconfig};
 use grep::{
     regex::RegexMatcher,
     searcher::{Searcher, sinks::UTF8},
 };
 use std::{fs::File, process::exit};
 
-pub fn locate(pattern: String, cfg: Userconfig, strict: bool) -> Vec<String> {
-    let raw_pattern = match strict {
-        false => format!(r":\w*{pattern}\w*:"),
-        true => format!(r":{pattern}:"),
+pub fn locate(args: LocateArgs, mut cfg: Userconfig) -> Vec<String> {
+    let raw_pattern = match args.strict {
+        false => format!(r":\w*{}\w*:", args.pattern),
+        true => format!(r":{}:", args.pattern),
     };
 
-    let files_to_search: Vec<String> = cfg.get_files_to_search();
+    let files_to_search: Vec<String> = cfg.get_files_to_search(args.include, args.exclude);
 
     let mut files: Vec<String> = Vec::new();
 

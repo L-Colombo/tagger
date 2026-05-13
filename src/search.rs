@@ -1,4 +1,5 @@
 use crate::{
+    cli::SearchArgs,
     config::Userconfig,
     io::{get_all_tags, get_tags_from_file},
 };
@@ -6,13 +7,13 @@ use grep::{matcher::Matcher, regex::RegexMatcher};
 use rayon::prelude::*;
 use std::process::exit;
 
-pub fn search_tags(pattern: String, cfg: &Userconfig, file: Option<String>) -> Option<Vec<String>> {
-    let tags = match file {
-        None => get_all_tags(cfg),
-        Some(file) => get_tags_from_file(cfg, file),
+pub fn search_tags(args: SearchArgs, mut cfg: Userconfig) -> Option<Vec<String>> {
+    let tags = match args.file {
+        None => get_all_tags(&mut cfg),
+        Some(file) => get_tags_from_file(&cfg, file),
     };
 
-    let regex: RegexMatcher = match RegexMatcher::new(&pattern) {
+    let regex: RegexMatcher = match RegexMatcher::new(&args.pattern) {
         Ok(matcher) => matcher,
         Err(_) => {
             eprintln!("The provided pattern is possibly malformed");

@@ -29,12 +29,20 @@ set edit:completion:arg-completer[tgr] = {|@words|
             cand help 'Print this message or the help of the given subcommand(s)'
         }
         &'tgr;locate'= {
+            cand -i 'Override config by including files that match <PATTERN>'
+            cand --include 'Override config by including files that match <PATTERN>'
+            cand -e 'Override config by excluding files that match <PATTERN>'
+            cand --exclude 'Override config by excluding files that match <PATTERN>'
             cand -s 'Match the pattern strictly or loosely'
             cand --strict 'Match the pattern strictly or loosely'
             cand -h 'Print help'
             cand --help 'Print help'
         }
         &'tgr;refile'= {
+            cand -i 'Override config by including files that match <PATTERN>'
+            cand --include 'Override config by including files that match <PATTERN>'
+            cand -e 'Override config by excluding files that match <PATTERN>'
+            cand --exclude 'Override config by excluding files that match <PATTERN>'
             cand -n 'Print the contents to stdout instead of pager'
             cand --no-pager 'Print the contents to stdout instead of pager'
             cand -s 'Match the pattern strictly or loosely'
@@ -45,6 +53,10 @@ set edit:completion:arg-completer[tgr] = {|@words|
         &'tgr;search'= {
             cand -f 'File where to search for tags'
             cand --file 'File where to search for tags'
+            cand -i 'Override config by including files that match <PATTERN>'
+            cand --include 'Override config by including files that match <PATTERN>'
+            cand -e 'Override config by excluding files that match <PATTERN>'
+            cand --exclude 'Override config by excluding files that match <PATTERN>'
             cand -p 'Force the output to a pager'
             cand --pager 'Force the output to a pager'
             cand -h 'Print help'

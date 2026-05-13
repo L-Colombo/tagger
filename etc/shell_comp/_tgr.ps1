@@ -33,6 +33,10 @@ Register-ArgumentCompleter -Native -CommandName 'tgr' -ScriptBlock {
             break
         }
         'tgr;locate' {
+            [CompletionResult]::new('-i', '-i', [CompletionResultType]::ParameterName, 'Override config by including files that match <PATTERN>')
+            [CompletionResult]::new('--include', '--include', [CompletionResultType]::ParameterName, 'Override config by including files that match <PATTERN>')
+            [CompletionResult]::new('-e', '-e', [CompletionResultType]::ParameterName, 'Override config by excluding files that match <PATTERN>')
+            [CompletionResult]::new('--exclude', '--exclude', [CompletionResultType]::ParameterName, 'Override config by excluding files that match <PATTERN>')
             [CompletionResult]::new('-s', '-s', [CompletionResultType]::ParameterName, 'Match the pattern strictly or loosely')
             [CompletionResult]::new('--strict', '--strict', [CompletionResultType]::ParameterName, 'Match the pattern strictly or loosely')
             [CompletionResult]::new('-h', '-h', [CompletionResultType]::ParameterName, 'Print help')
@@ -40,6 +44,10 @@ Register-ArgumentCompleter -Native -CommandName 'tgr' -ScriptBlock {
             break
         }
         'tgr;refile' {
+            [CompletionResult]::new('-i', '-i', [CompletionResultType]::ParameterName, 'Override config by including files that match <PATTERN>')
+            [CompletionResult]::new('--include', '--include', [CompletionResultType]::ParameterName, 'Override config by including files that match <PATTERN>')
+            [CompletionResult]::new('-e', '-e', [CompletionResultType]::ParameterName, 'Override config by excluding files that match <PATTERN>')
+            [CompletionResult]::new('--exclude', '--exclude', [CompletionResultType]::ParameterName, 'Override config by excluding files that match <PATTERN>')
             [CompletionResult]::new('-n', '-n', [CompletionResultType]::ParameterName, 'Print the contents to stdout instead of pager')
             [CompletionResult]::new('--no-pager', '--no-pager', [CompletionResultType]::ParameterName, 'Print the contents to stdout instead of pager')
             [CompletionResult]::new('-s', '-s', [CompletionResultType]::ParameterName, 'Match the pattern strictly or loosely')
@@ -51,6 +59,10 @@ Register-ArgumentCompleter -Native -CommandName 'tgr' -ScriptBlock {
         'tgr;search' {
             [CompletionResult]::new('-f', '-f', [CompletionResultType]::ParameterName, 'File where to search for tags')
             [CompletionResult]::new('--file', '--file', [CompletionResultType]::ParameterName, 'File where to search for tags')
+            [CompletionResult]::new('-i', '-i', [CompletionResultType]::ParameterName, 'Override config by including files that match <PATTERN>')
+            [CompletionResult]::new('--include', '--include', [CompletionResultType]::ParameterName, 'Override config by including files that match <PATTERN>')
+            [CompletionResult]::new('-e', '-e', [CompletionResultType]::ParameterName, 'Override config by excluding files that match <PATTERN>')
+            [CompletionResult]::new('--exclude', '--exclude', [CompletionResultType]::ParameterName, 'Override config by excluding files that match <PATTERN>')
             [CompletionResult]::new('-p', '-p', [CompletionResultType]::ParameterName, 'Force the output to a pager')
             [CompletionResult]::new('--pager', '--pager', [CompletionResultType]::ParameterName, 'Force the output to a pager')
             [CompletionResult]::new('-h', '-h', [CompletionResultType]::ParameterName, 'Print help')

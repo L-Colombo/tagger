@@ -4,7 +4,7 @@
 .SH NAME
 tgr\-refile \- Refile org trees that have tags that match a pattern
 .SH SYNOPSIS
-\fBtgr refile\fR [\fB\-n\fR|\fB\-\-no\-pager\fR] [\fB\-s\fR|\fB\-\-strict\fR] [\fB\-h\fR|\fB\-\-help\fR] <\fIPATTERN\fR> [\fIOUTPUT FILE\fR] 
+\fBtgr refile\fR [\fB\-n\fR|\fB\-\-no\-pager\fR] [\fB\-s\fR|\fB\-\-strict\fR] [\fB\-i\fR|\fB\-\-include\fR] [\fB\-e\fR|\fB\-\-exclude\fR] [\fB\-h\fR|\fB\-\-help\fR] <\fIPATTERN\fR> [\fIOUTPUT FILE\fR] 
 .SH DESCRIPTION
 Refile org trees that have tags that match a pattern
 .SH OPTIONS
@@ -14,6 +14,12 @@ Print the contents to stdout instead of pager
 .TP
 \fB\-s\fR, \fB\-\-strict\fR
 Match the pattern strictly or loosely
+.TP
+\fB\-i\fR, \fB\-\-include\fR=\fIINCLUDE\fR
+Override config by including files that match <PATTERN>
+.TP
+\fB\-e\fR, \fB\-\-exclude\fR=\fIEXCLUDE\fR
+Override config by excluding files that match <PATTERN>
 .TP
 \fB\-h\fR, \fB\-\-help\fR
 Print help

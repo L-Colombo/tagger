@@ -43,7 +43,7 @@ pub enum Commands {
 }
 
 // Args
-#[derive(Args, Debug)]
+#[derive(Args, Debug, Clone)]
 pub struct LocateArgs {
     /// Pattern to search for tags
     #[arg(value_name = "PATTERN")]
@@ -51,9 +51,15 @@ pub struct LocateArgs {
     /// Match the pattern strictly or loosely
     #[arg(short, long, value_name = "STRICT")]
     pub strict: bool,
+    /// Override config by including files that match <PATTERN>
+    #[arg(long, short, value_name = "INCLUDE")]
+    pub include: Option<String>,
+    #[arg(long, short, value_name = "EXCLUDE")]
+    /// Override config by excluding files that match <PATTERN>
+    pub exclude: Option<String>,
 }
 
-#[derive(Args, Debug)]
+#[derive(Args, Debug, Clone)]
 pub struct RefileArgs {
     /// Pattern to find Org trees to refile
     #[arg(value_name = "PATTERN")]
@@ -67,9 +73,15 @@ pub struct RefileArgs {
     /// Match the pattern strictly or loosely
     #[arg(short, long, value_name = "STRICT")]
     pub strict: bool,
+    /// Override config by including files that match <PATTERN>
+    #[arg(long, short, value_name = "INCLUDE")]
+    pub include: Option<String>,
+    #[arg(long, short, value_name = "EXCLUDE")]
+    /// Override config by excluding files that match <PATTERN>
+    pub exclude: Option<String>,
 }
 
-#[derive(Args, Debug)]
+#[derive(Args, Debug, Clone)]
 pub struct SearchArgs {
     /// Pattern used to search for tags
     #[arg(value_name = "PATTERN")]
@@ -80,9 +92,15 @@ pub struct SearchArgs {
     /// Force the output to a pager
     #[arg(long, short, value_name = "PAGER")]
     pub pager: bool,
+    /// Override config by including files that match <PATTERN>
+    #[arg(long, short, value_name = "INCLUDE")]
+    pub include: Option<String>,
+    #[arg(long, short, value_name = "EXCLUDE")]
+    /// Override config by excluding files that match <PATTERN>
+    pub exclude: Option<String>,
 }
 
-#[derive(Args, Debug)]
+#[derive(Args, Debug, Clone)]
 pub struct TagArgs {
     /// Optional file to search instead of searching in the whole Org directory
     #[arg(long, short, value_name = "FILE", value_hint = ValueHint::FilePath)]
@@ -90,12 +108,16 @@ pub struct TagArgs {
     /// Force the output to a pager
     #[arg(long, short, value_name = "PAGER")]
     pub pager: bool,
+    // /// Override config by including files that match <PATTERN>
+    // pub include: Option<String>,
+    // /// Override config by excluding files that match <PATTERN>
+    // pub exclude: Option<String>,
 }
 
 // Wrappers and helpers
 pub fn locate_command(args: LocateArgs) -> Result<(), MinusError> {
     let cfg: Userconfig = Userconfig::new();
-    let files: Vec<String> = locate(args.pattern, cfg, args.strict);
+    let files: Vec<String> = locate(args, cfg);
 
     for file in files {
         println!("{file}")
@@ -106,7 +128,7 @@ pub fn locate_command(args: LocateArgs) -> Result<(), MinusError> {
 
 pub fn refile_command(args: RefileArgs) -> Result<(), MinusError> {
     let cfg: Userconfig = Userconfig::new();
-    let file_contents: String = refile::refile(args.pattern, cfg, args.strict);
+    let file_contents: String = refile::refile(&args, cfg);
 
     match args.output_file {
         None => {
@@ -153,7 +175,7 @@ pub fn refile_command(args: RefileArgs) -> Result<(), MinusError> {
 
 pub fn search_command(args: SearchArgs) -> Result<(), MinusError> {
     let cfg: Userconfig = Userconfig::new();
-    match search_tags(args.pattern, &cfg, args.file) {
+    match search_tags(args.clone(), cfg) {
         None => println!("No tags matching the provided pattern were found!"),
         Some(taglist) => print_tags_to_stdout_or_pager(taglist, args.pager)?,
     }
@@ -161,9 +183,9 @@ pub fn search_command(args: SearchArgs) -> Result<(), MinusError> {
 }
 
 pub fn tags_command(args: TagArgs) -> Result<(), MinusError> {
-    let cfg: Userconfig = Userconfig::new();
+    let mut cfg: Userconfig = Userconfig::new();
     match args.file {
-        None => match get_all_tags(&cfg) {
+        None => match get_all_tags(&mut cfg) {
             Some(taglist) => print_tags_to_stdout_or_pager(taglist, args.pager)?,
             None => println!("Could not find any tags in your org directory"),
         },

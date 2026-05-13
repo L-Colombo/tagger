@@ -11,8 +11,8 @@ use std::{
     process::exit,
 };
 
-pub fn get_all_tags(cfg: &Userconfig) -> Option<Vec<String>> {
-    let files_to_search: Vec<String> = cfg.get_files_to_search();
+pub fn get_all_tags(cfg: &mut Userconfig) -> Option<Vec<String>> {
+    let files_to_search: Vec<String> = cfg.get_files_to_search(None, None);
 
     let mut tmp: Vec<Option<Vec<String>>> = vec![];
 

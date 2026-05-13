@@ -1,4 +1,4 @@
-use crate::{config::Userconfig, orgtree::Orgtree};
+use crate::{cli::RefileArgs, config::Userconfig, orgtree::Orgtree};
 use grep::{
     regex::RegexMatcher,
     searcher::{Searcher, sinks::UTF8},
@@ -7,13 +7,14 @@ use std::{fs::File, process::exit};
 
 /// This function returns the refiled files in form of a string.
 /// The `write_refiled_file` in the `io` module will then take care of writing it to a file.
-pub fn refile(pattern: String, cfg: Userconfig, strict: bool) -> String {
-    let raw_pattern = match strict {
-        false => format!(r":\w*{pattern}\w*:"),
-        true => format!(r":{pattern}:"),
+pub fn refile(args: &RefileArgs, mut cfg: Userconfig) -> String {
+    let raw_pattern = match args.strict {
+        false => format!(r":\w*{}\w*:", args.pattern),
+        true => format!(r":{}:", args.pattern),
     };
 
-    let files_to_search: Vec<String> = cfg.get_files_to_search();
+    let files_to_search: Vec<String> =
+        cfg.get_files_to_search(args.include.clone(), args.exclude.clone());
 
     let mut all_matches: Vec<(String, Vec<usize>)> = vec![];
 
@@ -65,7 +66,7 @@ pub fn refile(pattern: String, cfg: Userconfig, strict: bool) -> String {
     }
 
     if org_trees.is_empty() {
-        eprintln!("No matches found for pattern \"{pattern}\"!");
+        eprintln!("No matches found for pattern \"{}\"!", args.pattern);
         exit(1)
     }
 

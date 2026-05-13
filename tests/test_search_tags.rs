@@ -1,7 +1,7 @@
 use pretty_assertions::assert_eq;
 use relative_path::RelativePath;
 use std::env::current_dir;
-use tagger::{config::Userconfig, search::search_tags};
+use tagger::{cli::SearchArgs, config::Userconfig, search::search_tags};
 
 #[test]
 fn search_tags_in_all_files() {
@@ -12,18 +12,25 @@ fn search_tags_in_all_files() {
         .unwrap()
         .to_string();
 
-    let cfg: Userconfig = Userconfig {
-        org_directory: org_dir_path,
-        exclude_files: None,
-        exclude_pattern: None,
-        exclude_patterns: None,
-    };
-
     let pattern1: String = String::from("foo");
     let pattern2: String = String::from("\\w+foo");
 
     assert_eq!(
-        search_tags(pattern1, &cfg, None),
+        search_tags(
+            SearchArgs {
+                pattern: pattern1,
+                file: None,
+                pager: false,
+                include: None,
+                exclude: None,
+            },
+            Userconfig {
+                org_directory: org_dir_path.clone(),
+                exclude_files: None,
+                exclude_pattern: None,
+                exclude_patterns: None,
+            }
+        ),
         Some(vec![
             String::from("foo_another_file"),
             String::from("foo_file_1"),
@@ -35,7 +42,21 @@ fn search_tags_in_all_files() {
     );
 
     assert_eq!(
-        search_tags(pattern2, &cfg, None),
+        search_tags(
+            SearchArgs {
+                pattern: pattern2,
+                file: None,
+                pager: false,
+                include: None,
+                exclude: None,
+            },
+            Userconfig {
+                org_directory: org_dir_path,
+                exclude_files: None,
+                exclude_pattern: None,
+                exclude_patterns: None,
+            }
+        ),
         Some(vec![
             String::from("trailing_foo_another_file"),
             String::from("trailing_foo_file_1"),
@@ -53,19 +74,26 @@ fn search_tags_in_specific_file() {
         .unwrap()
         .to_string();
 
-    let cfg: Userconfig = Userconfig {
-        org_directory: org_dir_path,
-        exclude_files: None,
-        exclude_pattern: None,
-        exclude_patterns: None,
-    };
-
     let pattern1: String = String::from("foo");
     let pattern2: String = String::from("\\w+foo");
     const FILE: &str = "org_file1.org";
 
     assert_eq!(
-        search_tags(pattern1, &cfg, Some(FILE.to_string())),
+        search_tags(
+            SearchArgs {
+                pattern: pattern1,
+                file: Some(FILE.to_string()),
+                pager: false,
+                include: None,
+                exclude: None,
+            },
+            Userconfig {
+                org_directory: org_dir_path.clone(),
+                exclude_files: None,
+                exclude_pattern: None,
+                exclude_patterns: None,
+            }
+        ),
         Some(vec![
             String::from("foo_file_1"),
             String::from("trailing_foo_file_1"),
@@ -73,7 +101,21 @@ fn search_tags_in_specific_file() {
     );
 
     assert_eq!(
-        search_tags(pattern2, &cfg, Some(FILE.to_string())),
+        search_tags(
+            SearchArgs {
+                pattern: pattern2,
+                file: Some(FILE.to_string()),
+                pager: false,
+                include: None,
+                exclude: None,
+            },
+            Userconfig {
+                org_directory: org_dir_path,
+                exclude_files: None,
+                exclude_pattern: None,
+                exclude_patterns: None,
+            }
+        ),
         Some(vec![
             //String::from("foo_file_1"),
             String::from("trailing_foo_file_1"),

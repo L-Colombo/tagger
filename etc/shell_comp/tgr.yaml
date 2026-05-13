@@ -10,7 +10,9 @@ commands:
   - loc
   description: Locate the files that contain a tag matching <PATTERN>
   flags:
+    -e, --exclude=: Override config by excluding files that match <PATTERN>
     -h, --help: Print help
+    -i, --include=: Override config by including files that match <PATTERN>
     -s, --strict: Match the pattern strictly or loosely
 - name: refile
   aliases:
@@ -18,7 +20,9 @@ commands:
   - ref
   description: Refile org trees that have tags that match a pattern
   flags:
+    -e, --exclude=: Override config by excluding files that match <PATTERN>
     -h, --help: Print help
+    -i, --include=: Override config by including files that match <PATTERN>
     -n, --no-pager: Print the contents to stdout instead of pager
     -s, --strict: Match the pattern strictly or loosely
 - name: search
@@ -26,8 +30,10 @@ commands:
   - s
   description: Search tags in Org directory or file
   flags:
+    -e, --exclude=: Override config by excluding files that match <PATTERN>
     -f, --file=: File where to search for tags
     -h, --help: Print help
+    -i, --include=: Override config by including files that match <PATTERN>
     -p, --pager: Force the output to a pager
   completion:
     flag:

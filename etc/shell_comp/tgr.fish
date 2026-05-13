@@ -31,12 +31,18 @@ complete -c tgr -n "__fish_tgr_needs_command" -f -a "refile" -d 'Refile org tree
 complete -c tgr -n "__fish_tgr_needs_command" -f -a "search" -d 'Search tags in Org directory or file'
 complete -c tgr -n "__fish_tgr_needs_command" -f -a "tags" -d 'Print tags to stdout or to pager'
 complete -c tgr -n "__fish_tgr_needs_command" -f -a "help" -d 'Print this message or the help of the given subcommand(s)'
+complete -c tgr -n "__fish_tgr_using_subcommand locate" -s i -l include -d 'Override config by including files that match <PATTERN>' -r
+complete -c tgr -n "__fish_tgr_using_subcommand locate" -s e -l exclude -d 'Override config by excluding files that match <PATTERN>' -r
 complete -c tgr -n "__fish_tgr_using_subcommand locate" -s s -l strict -d 'Match the pattern strictly or loosely'
 complete -c tgr -n "__fish_tgr_using_subcommand locate" -s h -l help -d 'Print help'
+complete -c tgr -n "__fish_tgr_using_subcommand refile" -s i -l include -d 'Override config by including files that match <PATTERN>' -r
+complete -c tgr -n "__fish_tgr_using_subcommand refile" -s e -l exclude -d 'Override config by excluding files that match <PATTERN>' -r
 complete -c tgr -n "__fish_tgr_using_subcommand refile" -s n -l no-pager -d 'Print the contents to stdout instead of pager'
 complete -c tgr -n "__fish_tgr_using_subcommand refile" -s s -l strict -d 'Match the pattern strictly or loosely'
 complete -c tgr -n "__fish_tgr_using_subcommand refile" -s h -l help -d 'Print help'
 complete -c tgr -n "__fish_tgr_using_subcommand search" -s f -l file -d 'File where to search for tags' -r -F
+complete -c tgr -n "__fish_tgr_using_subcommand search" -s i -l include -d 'Override config by including files that match <PATTERN>' -r
+complete -c tgr -n "__fish_tgr_using_subcommand search" -s e -l exclude -d 'Override config by excluding files that match <PATTERN>' -r
 complete -c tgr -n "__fish_tgr_using_subcommand search" -s p -l pager -d 'Force the output to a pager'
 complete -c tgr -n "__fish_tgr_using_subcommand search" -s h -l help -d 'Print help'
 complete -c tgr -n "__fish_tgr_using_subcommand tags" -s f -l file -d 'Optional file to search instead of searching in the whole Org directory' -r -F

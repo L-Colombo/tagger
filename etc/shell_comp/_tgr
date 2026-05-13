@@ -30,6 +30,10 @@ _tgr() {
         case $line[1] in
             (locate)
 _arguments "${_arguments_options[@]}" : \
+'-i+[Override config by including files that match <PATTERN>]:INCLUDE:_default' \
+'--include=[Override config by including files that match <PATTERN>]:INCLUDE:_default' \
+'-e+[Override config by excluding files that match <PATTERN>]:EXCLUDE:_default' \
+'--exclude=[Override config by excluding files that match <PATTERN>]:EXCLUDE:_default' \
 '-s[Match the pattern strictly or loosely]' \
 '--strict[Match the pattern strictly or loosely]' \
 '-h[Print help]' \
@@ -39,6 +43,10 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (refile)
 _arguments "${_arguments_options[@]}" : \
+'-i+[Override config by including files that match <PATTERN>]:INCLUDE:_default' \
+'--include=[Override config by including files that match <PATTERN>]:INCLUDE:_default' \
+'-e+[Override config by excluding files that match <PATTERN>]:EXCLUDE:_default' \
+'--exclude=[Override config by excluding files that match <PATTERN>]:EXCLUDE:_default' \
 '-n[Print the contents to stdout instead of pager]' \
 '--no-pager[Print the contents to stdout instead of pager]' \
 '-s[Match the pattern strictly or loosely]' \
@@ -53,6 +61,10 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 '-f+[File where to search for tags]:FILE:_files' \
 '--file=[File where to search for tags]:FILE:_files' \
+'-i+[Override config by including files that match <PATTERN>]:INCLUDE:_default' \
+'--include=[Override config by including files that match <PATTERN>]:INCLUDE:_default' \
+'-e+[Override config by excluding files that match <PATTERN>]:EXCLUDE:_default' \
+'--exclude=[Override config by excluding files that match <PATTERN>]:EXCLUDE:_default' \
 '-p[Force the output to a pager]' \
 '--pager[Force the output to a pager]' \
 '-h[Print help]' \

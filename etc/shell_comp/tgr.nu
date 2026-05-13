@@ -10,6 +10,8 @@ module completions {
   export extern "tgr locate" [
     pattern: string           # Pattern to search for tags
     --strict(-s)              # Match the pattern strictly or loosely
+    --include(-i): string     # Override config by including files that match <PATTERN>
+    --exclude(-e): string     # Override config by excluding files that match <PATTERN>
     --help(-h)                # Print help
   ]
 
@@ -19,6 +21,8 @@ module completions {
     --no-pager(-n)            # Print the contents to stdout instead of pager
     output_file?: string      # Name of the output file. If not given, ouptut is paged to the console
     --strict(-s)              # Match the pattern strictly or loosely
+    --include(-i): string     # Override config by including files that match <PATTERN>
+    --exclude(-e): string     # Override config by excluding files that match <PATTERN>
     --help(-h)                # Print help
   ]
 
@@ -27,6 +31,8 @@ module completions {
     pattern: string           # Pattern used to search for tags
     --file(-f): path          # File where to search for tags
     --pager(-p)               # Force the output to a pager
+    --include(-i): string     # Override config by including files that match <PATTERN>
+    --exclude(-e): string     # Override config by excluding files that match <PATTERN>
     --help(-h)                # Print help
   ]
 

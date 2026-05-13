@@ -7,6 +7,24 @@ const completion: Fig.Spec = {
       description: "Locate the files that contain a tag matching <PATTERN>",
       options: [
         {
+          name: ["-i", "--include"],
+          description: "Override config by including files that match <PATTERN>",
+          isRepeatable: true,
+          args: {
+            name: "include",
+            isOptional: true,
+          },
+        },
+        {
+          name: ["-e", "--exclude"],
+          description: "Override config by excluding files that match <PATTERN>",
+          isRepeatable: true,
+          args: {
+            name: "exclude",
+            isOptional: true,
+          },
+        },
+        {
           name: ["-s", "--strict"],
           description: "Match the pattern strictly or loosely",
         },
@@ -23,6 +41,24 @@ const completion: Fig.Spec = {
       name: ["refile", "r", "ref"],
       description: "Refile org trees that have tags that match a pattern",
       options: [
+        {
+          name: ["-i", "--include"],
+          description: "Override config by including files that match <PATTERN>",
+          isRepeatable: true,
+          args: {
+            name: "include",
+            isOptional: true,
+          },
+        },
+        {
+          name: ["-e", "--exclude"],
+          description: "Override config by excluding files that match <PATTERN>",
+          isRepeatable: true,
+          args: {
+            name: "exclude",
+            isOptional: true,
+          },
+        },
         {
           name: ["-n", "--no-pager"],
           description: "Print the contents to stdout instead of pager",
@@ -58,6 +94,24 @@ const completion: Fig.Spec = {
             name: "file",
             isOptional: true,
             template: "filepaths",
+          },
+        },
+        {
+          name: ["-i", "--include"],
+          description: "Override config by including files that match <PATTERN>",
+          isRepeatable: true,
+          args: {
+            name: "include",
+            isOptional: true,
+          },
+        },
+        {
+          name: ["-e", "--exclude"],
+          description: "Override config by excluding files that match <PATTERN>",
+          isRepeatable: true,
+          args: {
+            name: "exclude",
+            isOptional: true,
           },
         },
         {
