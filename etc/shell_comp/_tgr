@@ -28,7 +28,20 @@ _tgr() {
         (( CURRENT += 1 ))
         curcontext="${curcontext%:*:*}:tgr-command-$line[1]:"
         case $line[1] in
-            (locate)
+            (count)
+_arguments "${_arguments_options[@]}" : \
+'-f+[File where to search for tags]:FILE:_files' \
+'--file=[File where to search for tags]:FILE:_files' \
+'-i+[Override config by including files that match <PATTERN>]:INCLUDE:_default' \
+'--include=[Override config by including files that match <PATTERN>]:INCLUDE:_default' \
+'-e+[Override config by excluding files that match <PATTERN>]:EXCLUDE:_default' \
+'--exclude=[Override config by excluding files that match <PATTERN>]:EXCLUDE:_default' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::pattern -- Pattern to search for tags:_default' \
+&& ret=0
+;;
+(locate)
 _arguments "${_arguments_options[@]}" : \
 '-i+[Override config by including files that match <PATTERN>]:INCLUDE:_default' \
 '--include=[Override config by including files that match <PATTERN>]:INCLUDE:_default' \
@@ -94,7 +107,11 @@ _arguments "${_arguments_options[@]}" : \
         (( CURRENT += 1 ))
         curcontext="${curcontext%:*:*}:tgr-help-command-$line[1]:"
         case $line[1] in
-            (locate)
+            (count)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(locate)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
@@ -126,6 +143,7 @@ esac
 (( $+functions[_tgr_commands] )) ||
 _tgr_commands() {
     local commands; commands=(
+'count:Print the number of tags that match <pattern>' \
 'locate:Locate the files that contain a tag matching <PATTERN>' \
 'refile:Refile org trees that have tags that match a pattern' \
 'search:Search tags in Org directory or file' \
@@ -134,9 +152,15 @@ _tgr_commands() {
     )
     _describe -t commands 'tgr commands' commands "$@"
 }
+(( $+functions[_tgr__count_commands] )) ||
+_tgr__count_commands() {
+    local commands; commands=()
+    _describe -t commands 'tgr count commands' commands "$@"
+}
 (( $+functions[_tgr__help_commands] )) ||
 _tgr__help_commands() {
     local commands; commands=(
+'count:Print the number of tags that match <pattern>' \
 'locate:Locate the files that contain a tag matching <PATTERN>' \
 'refile:Refile org trees that have tags that match a pattern' \
 'search:Search tags in Org directory or file' \
@@ -144,6 +168,11 @@ _tgr__help_commands() {
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'tgr help commands' commands "$@"
+}
+(( $+functions[_tgr__help__count_commands] )) ||
+_tgr__help__count_commands() {
+    local commands; commands=()
+    _describe -t commands 'tgr help count commands' commands "$@"
 }
 (( $+functions[_tgr__help__help_commands] )) ||
 _tgr__help__help_commands() {

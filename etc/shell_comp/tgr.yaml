@@ -4,6 +4,21 @@ flags:
   -h, --help: Print help (see more with '--help')
   -V, --version: Print version
 commands:
+- name: count
+  aliases:
+  - c
+  description: Print the number of tags that match <pattern>
+  flags:
+    -e, --exclude=: Override config by excluding files that match <PATTERN>
+    -f, --file=: File where to search for tags
+    -h, --help: Print help
+    -i, --include=: Override config by including files that match <PATTERN>
+  completion:
+    flag:
+      file:
+      - $files
+    positional:
+    - []
 - name: locate
   aliases:
   - l
@@ -57,6 +72,8 @@ commands:
 - name: help
   description: Print this message or the help of the given subcommand(s)
   commands:
+  - name: count
+    description: Print the number of tags that match <pattern>
   - name: locate
     description: Locate the files that contain a tag matching <PATTERN>
   - name: refile

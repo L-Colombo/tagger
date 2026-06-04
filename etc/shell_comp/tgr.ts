@@ -3,6 +3,48 @@ const completion: Fig.Spec = {
   description: "Manage `.org` files' tags from the CLI",
   subcommands: [
     {
+      name: ["count", "c"],
+      description: "Print the number of tags that match <pattern>",
+      options: [
+        {
+          name: ["-f", "--file"],
+          description: "File where to search for tags",
+          isRepeatable: true,
+          args: {
+            name: "file",
+            isOptional: true,
+            template: "filepaths",
+          },
+        },
+        {
+          name: ["-i", "--include"],
+          description: "Override config by including files that match <PATTERN>",
+          isRepeatable: true,
+          args: {
+            name: "include",
+            isOptional: true,
+          },
+        },
+        {
+          name: ["-e", "--exclude"],
+          description: "Override config by excluding files that match <PATTERN>",
+          isRepeatable: true,
+          args: {
+            name: "exclude",
+            isOptional: true,
+          },
+        },
+        {
+          name: ["-h", "--help"],
+          description: "Print help",
+        },
+      ],
+      args: {
+        name: "pattern",
+        isOptional: true,
+      },
+    },
+    {
       name: ["locate", "l", "loc"],
       description: "Locate the files that contain a tag matching <PATTERN>",
       options: [
@@ -155,6 +197,10 @@ const completion: Fig.Spec = {
       name: "help",
       description: "Print this message or the help of the given subcommand(s)",
       subcommands: [
+        {
+          name: "count",
+          description: "Print the number of tags that match <pattern>",
+        },
         {
           name: "locate",
           description: "Locate the files that contain a tag matching <PATTERN>",

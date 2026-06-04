@@ -25,11 +25,23 @@ Register-ArgumentCompleter -Native -CommandName 'tgr' -ScriptBlock {
             [CompletionResult]::new('--help', '--help', [CompletionResultType]::ParameterName, 'Print help (see more with ''--help'')')
             [CompletionResult]::new('-V', '-V ', [CompletionResultType]::ParameterName, 'Print version')
             [CompletionResult]::new('--version', '--version', [CompletionResultType]::ParameterName, 'Print version')
+            [CompletionResult]::new('count', 'count', [CompletionResultType]::ParameterValue, 'Print the number of tags that match <pattern>')
             [CompletionResult]::new('locate', 'locate', [CompletionResultType]::ParameterValue, 'Locate the files that contain a tag matching <PATTERN>')
             [CompletionResult]::new('refile', 'refile', [CompletionResultType]::ParameterValue, 'Refile org trees that have tags that match a pattern')
             [CompletionResult]::new('search', 'search', [CompletionResultType]::ParameterValue, 'Search tags in Org directory or file')
             [CompletionResult]::new('tags', 'tags', [CompletionResultType]::ParameterValue, 'Print tags to stdout or to pager')
             [CompletionResult]::new('help', 'help', [CompletionResultType]::ParameterValue, 'Print this message or the help of the given subcommand(s)')
+            break
+        }
+        'tgr;count' {
+            [CompletionResult]::new('-f', '-f', [CompletionResultType]::ParameterName, 'File where to search for tags')
+            [CompletionResult]::new('--file', '--file', [CompletionResultType]::ParameterName, 'File where to search for tags')
+            [CompletionResult]::new('-i', '-i', [CompletionResultType]::ParameterName, 'Override config by including files that match <PATTERN>')
+            [CompletionResult]::new('--include', '--include', [CompletionResultType]::ParameterName, 'Override config by including files that match <PATTERN>')
+            [CompletionResult]::new('-e', '-e', [CompletionResultType]::ParameterName, 'Override config by excluding files that match <PATTERN>')
+            [CompletionResult]::new('--exclude', '--exclude', [CompletionResultType]::ParameterName, 'Override config by excluding files that match <PATTERN>')
+            [CompletionResult]::new('-h', '-h', [CompletionResultType]::ParameterName, 'Print help')
+            [CompletionResult]::new('--help', '--help', [CompletionResultType]::ParameterName, 'Print help')
             break
         }
         'tgr;locate' {
@@ -79,11 +91,15 @@ Register-ArgumentCompleter -Native -CommandName 'tgr' -ScriptBlock {
             break
         }
         'tgr;help' {
+            [CompletionResult]::new('count', 'count', [CompletionResultType]::ParameterValue, 'Print the number of tags that match <pattern>')
             [CompletionResult]::new('locate', 'locate', [CompletionResultType]::ParameterValue, 'Locate the files that contain a tag matching <PATTERN>')
             [CompletionResult]::new('refile', 'refile', [CompletionResultType]::ParameterValue, 'Refile org trees that have tags that match a pattern')
             [CompletionResult]::new('search', 'search', [CompletionResultType]::ParameterValue, 'Search tags in Org directory or file')
             [CompletionResult]::new('tags', 'tags', [CompletionResultType]::ParameterValue, 'Print tags to stdout or to pager')
             [CompletionResult]::new('help', 'help', [CompletionResultType]::ParameterValue, 'Print this message or the help of the given subcommand(s)')
+            break
+        }
+        'tgr;help;count' {
             break
         }
         'tgr;help;locate' {

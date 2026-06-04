@@ -22,11 +22,22 @@ set edit:completion:arg-completer[tgr] = {|@words|
             cand --help 'Print help (see more with ''--help'')'
             cand -V 'Print version'
             cand --version 'Print version'
+            cand count 'Print the number of tags that match <pattern>'
             cand locate 'Locate the files that contain a tag matching <PATTERN>'
             cand refile 'Refile org trees that have tags that match a pattern'
             cand search 'Search tags in Org directory or file'
             cand tags 'Print tags to stdout or to pager'
             cand help 'Print this message or the help of the given subcommand(s)'
+        }
+        &'tgr;count'= {
+            cand -f 'File where to search for tags'
+            cand --file 'File where to search for tags'
+            cand -i 'Override config by including files that match <PATTERN>'
+            cand --include 'Override config by including files that match <PATTERN>'
+            cand -e 'Override config by excluding files that match <PATTERN>'
+            cand --exclude 'Override config by excluding files that match <PATTERN>'
+            cand -h 'Print help'
+            cand --help 'Print help'
         }
         &'tgr;locate'= {
             cand -i 'Override config by including files that match <PATTERN>'
@@ -71,11 +82,14 @@ set edit:completion:arg-completer[tgr] = {|@words|
             cand --help 'Print help'
         }
         &'tgr;help'= {
+            cand count 'Print the number of tags that match <pattern>'
             cand locate 'Locate the files that contain a tag matching <PATTERN>'
             cand refile 'Refile org trees that have tags that match a pattern'
             cand search 'Search tags in Org directory or file'
             cand tags 'Print tags to stdout or to pager'
             cand help 'Print this message or the help of the given subcommand(s)'
+        }
+        &'tgr;help;count'= {
         }
         &'tgr;help;locate'= {
         }

@@ -6,6 +6,15 @@ module completions {
     --version(-V)             # Print version
   ]
 
+  # Print the number of tags that match <pattern>
+  export extern "tgr count" [
+    pattern?: string          # Pattern to search for tags
+    --file(-f): path          # File where to search for tags
+    --include(-i): string     # Override config by including files that match <PATTERN>
+    --exclude(-e): string     # Override config by excluding files that match <PATTERN>
+    --help(-h)                # Print help
+  ]
+
   # Locate the files that contain a tag matching <PATTERN>
   export extern "tgr locate" [
     pattern: string           # Pattern to search for tags
@@ -45,6 +54,10 @@ module completions {
 
   # Print this message or the help of the given subcommand(s)
   export extern "tgr help" [
+  ]
+
+  # Print the number of tags that match <pattern>
+  export extern "tgr help count" [
   ]
 
   # Locate the files that contain a tag matching <PATTERN>

@@ -1,0 +1,25 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH tgr-count 1  "tgr-count " 
+.SH NAME
+tgr\-count \- Print the number of tags that match <pattern>
+.SH SYNOPSIS
+\fBtgr count\fR [\fB\-f\fR|\fB\-\-file\fR] [\fB\-i\fR|\fB\-\-include\fR] [\fB\-e\fR|\fB\-\-exclude\fR] [\fB\-h\fR|\fB\-\-help\fR] [\fIPATTERN\fR] 
+.SH DESCRIPTION
+Print the number of tags that match <pattern>
+.SH OPTIONS
+.TP
+\fB\-f\fR, \fB\-\-file\fR=\fIFILE\fR
+File where to search for tags
+.TP
+\fB\-i\fR, \fB\-\-include\fR=\fIINCLUDE\fR
+Override config by including files that match <PATTERN>
+.TP
+\fB\-e\fR, \fB\-\-exclude\fR=\fIEXCLUDE\fR
+Override config by excluding files that match <PATTERN>
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help
+.TP
+[\fIPATTERN\fR]
+Pattern to search for tags

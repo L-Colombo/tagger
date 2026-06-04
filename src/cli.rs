@@ -1,4 +1,4 @@
-use crate::{config::Userconfig, io::*, locate::locate, refile, search::search_tags};
+use crate::{config::Userconfig, count::count, io::*, locate::locate, refile, search::search_tags};
 use bat::PrettyPrinter;
 use clap::{Args, Parser, Subcommand, ValueHint, builder::styling};
 use minus::{MinusError, Pager, page_all};
@@ -28,6 +28,9 @@ pub struct Cli {
 
 #[derive(Debug, Subcommand)]
 pub enum Commands {
+    /// Print the number of tags that match <pattern>
+    #[clap(alias = "c")]
+    Count(CountArgs),
     /// Locate the files that contain a tag matching <PATTERN>
     #[clap(aliases = &["l", "loc"])]
     Locate(LocateArgs),
@@ -43,6 +46,22 @@ pub enum Commands {
 }
 
 // Args
+#[derive(Args, Debug, Clone)]
+pub struct CountArgs {
+    /// Pattern to search for tags
+    #[arg(value_name = "PATTERN")]
+    pub pattern: Option<String>,
+    /// File where to search for tags
+    #[arg(long, short, value_name = "FILE", value_hint = ValueHint::FilePath)]
+    pub file: Option<String>,
+    /// Override config by including files that match <PATTERN>
+    #[arg(long, short, value_name = "INCLUDE")]
+    pub include: Option<String>,
+    /// Override config by excluding files that match <PATTERN>
+    #[arg(long, short, value_name = "EXCLUDE")]
+    pub exclude: Option<String>,
+}
+
 #[derive(Args, Debug, Clone)]
 pub struct LocateArgs {
     /// Pattern to search for tags
@@ -95,8 +114,8 @@ pub struct SearchArgs {
     /// Override config by including files that match <PATTERN>
     #[arg(long, short, value_name = "INCLUDE")]
     pub include: Option<String>,
-    #[arg(long, short, value_name = "EXCLUDE")]
     /// Override config by excluding files that match <PATTERN>
+    #[arg(long, short, value_name = "EXCLUDE")]
     pub exclude: Option<String>,
 }
 
@@ -108,6 +127,8 @@ pub struct TagArgs {
     /// Force the output to a pager
     #[arg(long, short, value_name = "PAGER")]
     pub pager: bool,
+    // FIX: find a way to use include/exclude also with this command
+
     // /// Override config by including files that match <PATTERN>
     // pub include: Option<String>,
     // /// Override config by excluding files that match <PATTERN>
@@ -115,6 +136,29 @@ pub struct TagArgs {
 }
 
 // Wrappers and helpers
+pub fn count_command(args: CountArgs) -> Result<(), MinusError> {
+    let cfg: Userconfig = Userconfig::new();
+    let count = count(args.clone(), cfg);
+
+    match args.pattern {
+        Some(pattern) => match args.file {
+            // 1) no pattern given, search in all files
+            None => println!("Found {count} tags that match pattern `{pattern}`"),
+            // 2) no pattern given, search in one file
+            Some(file) => {
+                println!("Found {count} tags that match pattern `{pattern}` in file `{file}`")
+            }
+        },
+        None => match args.file {
+            // 3) pattern given, search in all files
+            None => println!("Found {count} tags across all files"),
+            // 4) pattern given, searc in one file
+            Some(file) => println!("Found {count} tags in file `{file}`"),
+        },
+    }
+    Ok(())
+}
+
 pub fn locate_command(args: LocateArgs) -> Result<(), MinusError> {
     let cfg: Userconfig = Userconfig::new();
     let files: Vec<String> = locate(args, cfg);
