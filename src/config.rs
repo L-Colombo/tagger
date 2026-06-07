@@ -2,7 +2,7 @@ use grep::{matcher::Matcher, regex::RegexMatcher};
 use serde_derive::Deserialize;
 use std::{fs::read_dir, process::exit};
 
-#[derive(Deserialize, Debug)]
+#[derive(Clone, Deserialize, Debug)]
 pub struct Userconfig {
     pub org_directory: String,
     pub exclude_files: Option<Vec<String>>,

@@ -137,13 +137,17 @@ pub struct TagArgs {
 
 // Wrappers and helpers
 pub fn count_command(args: CountArgs) -> Result<(), MinusError> {
-    let cfg: Userconfig = Userconfig::new();
-    let count = count(args.clone(), cfg);
+    let mut cfg: Userconfig = Userconfig::new();
+    let count = count(args.clone(), cfg.clone());
+    let files_searched: usize = cfg.get_files_to_search(args.include, args.exclude).len();
 
     match args.pattern {
         Some(pattern) => match args.file {
             // 1) no pattern given, search in all files
-            None => println!("Found {count} tags that match pattern `{pattern}`"),
+            // TODO: specify the number of files searched?
+            None => println!(
+                "Found {count} tags across {files_searched} file searched that match pattern `{pattern}`"
+            ),
             // 2) no pattern given, search in one file
             Some(file) => {
                 println!("Found {count} tags that match pattern `{pattern}` in file `{file}`")
@@ -151,7 +155,7 @@ pub fn count_command(args: CountArgs) -> Result<(), MinusError> {
         },
         None => match args.file {
             // 3) pattern given, search in all files
-            None => println!("Found {count} tags across all files"),
+            None => println!("Found {count} tags across {files_searched} files searched"),
             // 4) pattern given, searc in one file
             Some(file) => println!("Found {count} tags in file `{file}`"),
         },
