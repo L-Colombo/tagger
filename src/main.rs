@@ -5,7 +5,7 @@ use tagger::cli::*;
 
 fn main() -> Result<(), minus::error::MinusError> {
     // Uncomment and run once to update the man pages and shell completions scripts
-    _generate_manpages_and_completions();
+    // _generate_manpages_and_completions();
 
     let cli = Cli::parse();
 
