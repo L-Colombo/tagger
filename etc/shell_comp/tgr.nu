@@ -49,6 +49,7 @@ module completions {
   export extern "tgr tags" [
     --file(-f): path          # Optional file to search instead of searching in the whole Org directory
     --pager(-p)               # Force the output to a pager
+    --print(-P)               # Print all the tags into a .txt file
     --help(-h)                # Print help
   ]
 

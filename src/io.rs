@@ -59,6 +59,23 @@ pub fn get_tags_from_file(cfg: &Userconfig, file_name: String) -> Option<Vec<Str
     }
 }
 
+pub fn print_to_file(contents: String, filename: String) -> Result<(), MinusError> {
+    let mut output_file = std::fs::OpenOptions::new()
+        .create(true)
+        .truncate(true)
+        .write(true)
+        .open(filename)
+        .expect("Something went wrong creating the refiled file");
+
+    match io::Write::write_all(&mut output_file, contents.as_bytes()) {
+        Ok(_) => Ok(()),
+        Err(_) => {
+            eprintln!("Could not write the refiled file");
+            exit(1)
+        }
+    }
+}
+
 pub fn print_tags_to_stdout_or_pager(
     taglist: Vec<String>,
     force_pager: bool,

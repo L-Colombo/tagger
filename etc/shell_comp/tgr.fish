@@ -52,6 +52,7 @@ complete -c tgr -n "__fish_tgr_using_subcommand search" -s p -l pager -d 'Force 
 complete -c tgr -n "__fish_tgr_using_subcommand search" -s h -l help -d 'Print help'
 complete -c tgr -n "__fish_tgr_using_subcommand tags" -s f -l file -d 'Optional file to search instead of searching in the whole Org directory' -r -F
 complete -c tgr -n "__fish_tgr_using_subcommand tags" -s p -l pager -d 'Force the output to a pager'
+complete -c tgr -n "__fish_tgr_using_subcommand tags" -s P -l print -d 'Print all the tags into a .txt file'
 complete -c tgr -n "__fish_tgr_using_subcommand tags" -s h -l help -d 'Print help'
 complete -c tgr -n "__fish_tgr_using_subcommand help; and not __fish_seen_subcommand_from count locate refile search tags help" -f -a "count" -d 'Print the number of tags that match <pattern>'
 complete -c tgr -n "__fish_tgr_using_subcommand help; and not __fish_seen_subcommand_from count locate refile search tags help" -f -a "locate" -d 'Locate the files that contain a tag matching <PATTERN>'

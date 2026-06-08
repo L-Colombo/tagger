@@ -188,6 +188,10 @@ const completion: Fig.Spec = {
           description: "Force the output to a pager",
         },
         {
+          name: ["-P", "--print"],
+          description: "Print all the tags into a .txt file",
+        },
+        {
           name: ["-h", "--help"],
           description: "Print help",
         },

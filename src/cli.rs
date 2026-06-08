@@ -2,7 +2,6 @@ use crate::{config::Userconfig, count::count, io::*, locate::locate, refile, sea
 use bat::PrettyPrinter;
 use clap::{Args, Parser, Subcommand, ValueHint, builder::styling};
 use minus::{MinusError, Pager, page_all};
-use std::{io::Write, process::exit};
 
 const STYLES: styling::Styles = styling::Styles::styled()
     .header(styling::AnsiColor::Green.on_default().bold())
@@ -127,12 +126,14 @@ pub struct TagArgs {
     /// Force the output to a pager
     #[arg(long, short, value_name = "PAGER")]
     pub pager: bool,
-    // FIX: find a way to use include/exclude also with this command
-
+    /// Print all the tags into a .txt file
+    #[arg(long, short = 'P', value_name = "PRINT")]
+    pub print: bool,
     // /// Override config by including files that match <PATTERN>
     // pub include: Option<String>,
     // /// Override config by excluding files that match <PATTERN>
     // pub exclude: Option<String>,
+    // FIX: find a way to use include/exclude also with this command
 }
 
 // Wrappers and helpers
@@ -144,7 +145,6 @@ pub fn count_command(args: CountArgs) -> Result<(), MinusError> {
     match args.pattern {
         Some(pattern) => match args.file {
             // 1) no pattern given, search in all files
-            // TODO: specify the number of files searched?
             None => println!(
                 "Found {count} tags across {files_searched} file searched that match pattern `{pattern}`"
             ),
@@ -160,6 +160,7 @@ pub fn count_command(args: CountArgs) -> Result<(), MinusError> {
             Some(file) => println!("Found {count} tags in file `{file}`"),
         },
     }
+
     Ok(())
 }
 
@@ -203,44 +204,41 @@ pub fn refile_command(args: RefileArgs) -> Result<(), MinusError> {
                 format!("{output_file}.org")
             };
 
-            let mut output_file = std::fs::OpenOptions::new()
-                .create(true)
-                .truncate(true)
-                .write(true)
-                .open(fname)
-                .expect("Something went wrong creating the refiled file");
-
-            match output_file.write_all(file_contents.as_bytes()) {
-                Ok(_) => Ok(()),
-                Err(_) => {
-                    eprintln!("Could not write the refiled file");
-                    exit(1)
-                }
-            }
+            print_to_file(file_contents, fname)
         }
     }
 }
 
 pub fn search_command(args: SearchArgs) -> Result<(), MinusError> {
     let cfg: Userconfig = Userconfig::new();
+
     match search_tags(args.clone(), cfg) {
         None => println!("No tags matching the provided pattern were found!"),
         Some(taglist) => print_tags_to_stdout_or_pager(taglist, args.pager)?,
     }
+
     Ok(())
 }
 
 pub fn tags_command(args: TagArgs) -> Result<(), MinusError> {
     let mut cfg: Userconfig = Userconfig::new();
+
     match args.file {
         None => match get_all_tags(&mut cfg) {
-            Some(taglist) => print_tags_to_stdout_or_pager(taglist, args.pager)?,
+            Some(taglist) => match args.print {
+                true => print_to_file(taglist.join("\n"), String::from("tags.txt"))?,
+                false => print_tags_to_stdout_or_pager(taglist, args.pager)?,
+            },
             None => println!("Could not find any tags in your org directory"),
         },
         Some(file_name) => match get_tags_from_file(&cfg, file_name.clone()) {
-            Some(taglist) => print_tags_to_stdout_or_pager(taglist, args.pager)?,
+            Some(taglist) => match args.print {
+                true => print_to_file(taglist.join("\n"), String::from("tags.txt"))?,
+                false => print_tags_to_stdout_or_pager(taglist, args.pager)?,
+            },
             None => println!("I have found no tags in file: {file_name}"),
         },
     }
+
     Ok(())
 }

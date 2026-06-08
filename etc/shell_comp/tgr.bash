@@ -347,7 +347,7 @@ _tgr() {
             return 0
             ;;
         tgr__tags)
-            opts="-f -p -h --file --pager --help"
+            opts="-f -p -P -h --file --pager --print --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0

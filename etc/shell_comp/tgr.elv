@@ -78,6 +78,8 @@ set edit:completion:arg-completer[tgr] = {|@words|
             cand --file 'Optional file to search instead of searching in the whole Org directory'
             cand -p 'Force the output to a pager'
             cand --pager 'Force the output to a pager'
+            cand -P 'Print all the tags into a .txt file'
+            cand --print 'Print all the tags into a .txt file'
             cand -h 'Print help'
             cand --help 'Print help'
         }

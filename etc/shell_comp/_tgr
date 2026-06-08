@@ -91,6 +91,8 @@ _arguments "${_arguments_options[@]}" : \
 '--file=[Optional file to search instead of searching in the whole Org directory]:FILE:_files' \
 '-p[Force the output to a pager]' \
 '--pager[Force the output to a pager]' \
+'-P[Print all the tags into a .txt file]' \
+'--print[Print all the tags into a .txt file]' \
 '-h[Print help]' \
 '--help[Print help]' \
 && ret=0

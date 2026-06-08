@@ -65,6 +65,7 @@ commands:
     -f, --file=: Optional file to search instead of searching in the whole Org directory
     -h, --help: Print help
     -p, --pager: Force the output to a pager
+    -P, --print: Print all the tags into a .txt file
   completion:
     flag:
       file:
