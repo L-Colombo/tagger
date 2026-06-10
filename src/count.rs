@@ -11,11 +11,11 @@ pub fn count(args: CountArgs, mut cfg: Userconfig) -> usize {
     match args.pattern {
         None => match args.file {
             None => match get_all_tags(&mut cfg) {
-                None => return 0,
+                None => 0,
                 Some(tags) => tags.len(),
             },
             Some(file) => match get_tags_from_file(&cfg, file) {
-                None => return 0,
+                None => 0,
                 Some(tags) => tags.len(),
             },
         },
@@ -27,13 +27,13 @@ pub fn count(args: CountArgs, mut cfg: Userconfig) -> usize {
                 include: args.include,
                 // The pager option is never necessary in this context
                 pager: false,
-                pattern: pattern,
+                pattern,
             };
 
             match search_tags(search_args, cfg) {
                 None => return 0,
-                Some(tags) => return tags.len(),
-            };
+                Some(tags) => tags.len(),
+            }
         }
     }
 }
