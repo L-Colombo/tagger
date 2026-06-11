@@ -72,8 +72,8 @@ pub struct LocateArgs {
     /// Override config by including files that match <PATTERN>
     #[arg(long, short, value_name = "INCLUDE")]
     pub include: Option<String>,
-    #[arg(long, short, value_name = "EXCLUDE")]
     /// Override config by excluding files that match <PATTERN>
+    #[arg(long, short, value_name = "EXCLUDE")]
     pub exclude: Option<String>,
 }
 
@@ -94,8 +94,8 @@ pub struct RefileArgs {
     /// Override config by including files that match <PATTERN>
     #[arg(long, short, value_name = "INCLUDE")]
     pub include: Option<String>,
-    #[arg(long, short, value_name = "EXCLUDE")]
     /// Override config by excluding files that match <PATTERN>
+    #[arg(long, short, value_name = "EXCLUDE")]
     pub exclude: Option<String>,
 }
 
@@ -156,7 +156,7 @@ pub fn count_command(args: CountArgs) -> Result<(), MinusError> {
         None => match args.file {
             // 3) pattern given, search in all files
             None => println!("Found {count} tags across {files_searched} files searched"),
-            // 4) pattern given, searc in one file
+            // 4) pattern given, search in one file
             Some(file) => println!("Found {count} tags in file `{file}`"),
         },
     }

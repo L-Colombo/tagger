@@ -60,6 +60,7 @@ pub fn refile(args: &RefileArgs, mut cfg: Userconfig) -> String {
                 line_nr,
                 lines: vec![],
             };
+
             crate::orgtree::get_lines(&cfg, &mut ot);
             org_trees.push(ot);
         }
@@ -76,6 +77,7 @@ pub fn refile(args: &RefileArgs, mut cfg: Userconfig) -> String {
     str_buf.append("* ");
     str_buf.append(current_headline.clone());
     str_buf.append("\n");
+
     for org_tree in org_trees {
         if org_tree.file_name != current_headline {
             current_headline = org_tree.file_name.clone();
@@ -83,6 +85,7 @@ pub fn refile(args: &RefileArgs, mut cfg: Userconfig) -> String {
             str_buf.append(current_headline.clone());
             str_buf.append("\n");
         }
+
         for line in org_tree.lines {
             str_buf.append(line);
             str_buf.append("\n");
