@@ -40,7 +40,7 @@ pub fn has_tags(input: &String) -> bool {
 }
 
 pub fn get_tags(input: &String) -> Option<Vec<String>> {
-    match has_tags(&input.trim().to_string()) {
+    match has_tags(input) {
         false => None,
         true => Some(
             input
