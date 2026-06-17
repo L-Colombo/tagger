@@ -146,18 +146,20 @@ pub fn count_command(args: CountArgs) -> Result<(), MinusError> {
         Some(pattern) => match args.file {
             // 1) no pattern given, search in all files
             None => println!(
-                "Found {count} tags across {files_searched} file searched that match pattern `{pattern}`"
+                "Found {count} unique tags across {files_searched} file searched that match pattern `{pattern}`"
             ),
             // 2) no pattern given, search in one file
             Some(file) => {
-                println!("Found {count} tags that match pattern `{pattern}` in file `{file}`")
+                println!(
+                    "Found {count} unique tags that match pattern `{pattern}` in file `{file}`"
+                )
             }
         },
         None => match args.file {
             // 3) pattern given, search in all files
-            None => println!("Found {count} tags across {files_searched} files searched"),
+            None => println!("Found {count} unique tags across {files_searched} files searched"),
             // 4) pattern given, search in one file
-            Some(file) => println!("Found {count} tags in file `{file}`"),
+            Some(file) => println!("Found {count} unique tags in file `{file}`"),
         },
     }
 
