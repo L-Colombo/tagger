@@ -40,7 +40,7 @@ In the configuration file the following options can be declared in toml format:
 
 ** Basic usage
 
-Once installed, Tagger provides the ~tgr~ command, which has the ~locate~, ~refile~, ~search~ and ~tags~ subcommands.
+Once installed, Tagger provides the ~tgr~ command, which has the ~count~, ~locate~, ~refile~, ~search~ and ~tags~ subcommands.
 
 Generally, the syntax is ~tgr <subcommand> <options>~. To find out more, check the man pages or run ~tgr <subcommand> --help~.
 
