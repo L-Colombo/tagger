@@ -67,7 +67,7 @@ _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
 ':pattern -- Pattern to find Org trees to refile:_default' \
-'::output_file -- Name of the output file. If not given, ouptut is paged to the console:_default' \
+'::output_file -- Name of the output file. If not given, ouptut is paged or printed to the standard output:_default' \
 && ret=0
 ;;
 (search)
@@ -83,6 +83,16 @@ _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
 ':pattern -- Pattern used to search for tags:_default' \
+&& ret=0
+;;
+(sed)
+_arguments "${_arguments_options[@]}" : \
+'-v[Print additional information about substitutions]' \
+'--verbose[Print additional information about substitutions]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':tag -- The tag to be substituded. Note that this command will perform a substitution only on an exact match:_default' \
+':replacement -- The replacement:_default' \
 && ret=0
 ;;
 (tags)
@@ -125,6 +135,10 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
+(sed)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
 (tags)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
@@ -149,6 +163,7 @@ _tgr_commands() {
 'locate:Locate the files that contain a tag matching <PATTERN>' \
 'refile:Refile org trees that have tags that match a pattern' \
 'search:Search tags in Org directory or file' \
+'sed:A wrapper around the \`sed\` cli utility to safly manipulate tags' \
 'tags:Print tags to stdout or to pager' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
@@ -166,6 +181,7 @@ _tgr__help_commands() {
 'locate:Locate the files that contain a tag matching <PATTERN>' \
 'refile:Refile org trees that have tags that match a pattern' \
 'search:Search tags in Org directory or file' \
+'sed:A wrapper around the \`sed\` cli utility to safly manipulate tags' \
 'tags:Print tags to stdout or to pager' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
@@ -196,6 +212,11 @@ _tgr__help__search_commands() {
     local commands; commands=()
     _describe -t commands 'tgr help search commands' commands "$@"
 }
+(( $+functions[_tgr__help__sed_commands] )) ||
+_tgr__help__sed_commands() {
+    local commands; commands=()
+    _describe -t commands 'tgr help sed commands' commands "$@"
+}
 (( $+functions[_tgr__help__tags_commands] )) ||
 _tgr__help__tags_commands() {
     local commands; commands=()
@@ -215,6 +236,11 @@ _tgr__refile_commands() {
 _tgr__search_commands() {
     local commands; commands=()
     _describe -t commands 'tgr search commands' commands "$@"
+}
+(( $+functions[_tgr__sed_commands] )) ||
+_tgr__sed_commands() {
+    local commands; commands=()
+    _describe -t commands 'tgr sed commands' commands "$@"
 }
 (( $+functions[_tgr__tags_commands] )) ||
 _tgr__tags_commands() {

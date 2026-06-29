@@ -170,6 +170,28 @@ const completion: Fig.Spec = {
       },
     },
     {
+      name: "sed",
+      description: "A wrapper around the `sed` cli utility to safly manipulate tags",
+      options: [
+        {
+          name: ["-v", "--verbose"],
+          description: "Print additional information about substitutions",
+        },
+        {
+          name: ["-h", "--help"],
+          description: "Print help",
+        },
+      ],
+      args: [
+        {
+          name: "tag",
+        },
+        {
+          name: "replacement",
+        },
+      ]
+    },
+    {
       name: ["tags", "t", "tag"],
       description: "Print tags to stdout or to pager",
       options: [
@@ -216,6 +238,10 @@ const completion: Fig.Spec = {
         {
           name: "search",
           description: "Search tags in Org directory or file",
+        },
+        {
+          name: "sed",
+          description: "A wrapper around the `sed` cli utility to safly manipulate tags",
         },
         {
           name: "tags",

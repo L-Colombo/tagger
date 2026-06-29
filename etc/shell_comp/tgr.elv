@@ -26,6 +26,7 @@ set edit:completion:arg-completer[tgr] = {|@words|
             cand locate 'Locate the files that contain a tag matching <PATTERN>'
             cand refile 'Refile org trees that have tags that match a pattern'
             cand search 'Search tags in Org directory or file'
+            cand sed 'A wrapper around the `sed` cli utility to safly manipulate tags'
             cand tags 'Print tags to stdout or to pager'
             cand help 'Print this message or the help of the given subcommand(s)'
         }
@@ -73,6 +74,12 @@ set edit:completion:arg-completer[tgr] = {|@words|
             cand -h 'Print help'
             cand --help 'Print help'
         }
+        &'tgr;sed'= {
+            cand -v 'Print additional information about substitutions'
+            cand --verbose 'Print additional information about substitutions'
+            cand -h 'Print help'
+            cand --help 'Print help'
+        }
         &'tgr;tags'= {
             cand -f 'Optional file to search instead of searching in the whole Org directory'
             cand --file 'Optional file to search instead of searching in the whole Org directory'
@@ -88,6 +95,7 @@ set edit:completion:arg-completer[tgr] = {|@words|
             cand locate 'Locate the files that contain a tag matching <PATTERN>'
             cand refile 'Refile org trees that have tags that match a pattern'
             cand search 'Search tags in Org directory or file'
+            cand sed 'A wrapper around the `sed` cli utility to safly manipulate tags'
             cand tags 'Print tags to stdout or to pager'
             cand help 'Print this message or the help of the given subcommand(s)'
         }
@@ -98,6 +106,8 @@ set edit:completion:arg-completer[tgr] = {|@words|
         &'tgr;help;refile'= {
         }
         &'tgr;help;search'= {
+        }
+        &'tgr;help;sed'= {
         }
         &'tgr;help;tags'= {
         }

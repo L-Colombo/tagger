@@ -29,6 +29,7 @@ Register-ArgumentCompleter -Native -CommandName 'tgr' -ScriptBlock {
             [CompletionResult]::new('locate', 'locate', [CompletionResultType]::ParameterValue, 'Locate the files that contain a tag matching <PATTERN>')
             [CompletionResult]::new('refile', 'refile', [CompletionResultType]::ParameterValue, 'Refile org trees that have tags that match a pattern')
             [CompletionResult]::new('search', 'search', [CompletionResultType]::ParameterValue, 'Search tags in Org directory or file')
+            [CompletionResult]::new('sed', 'sed', [CompletionResultType]::ParameterValue, 'A wrapper around the `sed` cli utility to safly manipulate tags')
             [CompletionResult]::new('tags', 'tags', [CompletionResultType]::ParameterValue, 'Print tags to stdout or to pager')
             [CompletionResult]::new('help', 'help', [CompletionResultType]::ParameterValue, 'Print this message or the help of the given subcommand(s)')
             break
@@ -81,6 +82,13 @@ Register-ArgumentCompleter -Native -CommandName 'tgr' -ScriptBlock {
             [CompletionResult]::new('--help', '--help', [CompletionResultType]::ParameterName, 'Print help')
             break
         }
+        'tgr;sed' {
+            [CompletionResult]::new('-v', '-v', [CompletionResultType]::ParameterName, 'Print additional information about substitutions')
+            [CompletionResult]::new('--verbose', '--verbose', [CompletionResultType]::ParameterName, 'Print additional information about substitutions')
+            [CompletionResult]::new('-h', '-h', [CompletionResultType]::ParameterName, 'Print help')
+            [CompletionResult]::new('--help', '--help', [CompletionResultType]::ParameterName, 'Print help')
+            break
+        }
         'tgr;tags' {
             [CompletionResult]::new('-f', '-f', [CompletionResultType]::ParameterName, 'Optional file to search instead of searching in the whole Org directory')
             [CompletionResult]::new('--file', '--file', [CompletionResultType]::ParameterName, 'Optional file to search instead of searching in the whole Org directory')
@@ -97,6 +105,7 @@ Register-ArgumentCompleter -Native -CommandName 'tgr' -ScriptBlock {
             [CompletionResult]::new('locate', 'locate', [CompletionResultType]::ParameterValue, 'Locate the files that contain a tag matching <PATTERN>')
             [CompletionResult]::new('refile', 'refile', [CompletionResultType]::ParameterValue, 'Refile org trees that have tags that match a pattern')
             [CompletionResult]::new('search', 'search', [CompletionResultType]::ParameterValue, 'Search tags in Org directory or file')
+            [CompletionResult]::new('sed', 'sed', [CompletionResultType]::ParameterValue, 'A wrapper around the `sed` cli utility to safly manipulate tags')
             [CompletionResult]::new('tags', 'tags', [CompletionResultType]::ParameterValue, 'Print tags to stdout or to pager')
             [CompletionResult]::new('help', 'help', [CompletionResultType]::ParameterValue, 'Print this message or the help of the given subcommand(s)')
             break
@@ -111,6 +120,9 @@ Register-ArgumentCompleter -Native -CommandName 'tgr' -ScriptBlock {
             break
         }
         'tgr;help;search' {
+            break
+        }
+        'tgr;help;sed' {
             break
         }
         'tgr;help;tags' {

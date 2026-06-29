@@ -28,7 +28,7 @@ module completions {
   export extern "tgr refile" [
     pattern: string           # Pattern to find Org trees to refile
     --no-pager(-n)            # Print the contents to stdout instead of pager
-    output_file?: string      # Name of the output file. If not given, ouptut is paged to the console
+    output_file?: string      # Name of the output file. If not given, ouptut is paged or printed to the standard output
     --strict(-s)              # Match the pattern strictly or loosely
     --include(-i): string     # Override config by including files that match <PATTERN>
     --exclude(-e): string     # Override config by excluding files that match <PATTERN>
@@ -42,6 +42,14 @@ module completions {
     --pager(-p)               # Force the output to a pager
     --include(-i): string     # Override config by including files that match <PATTERN>
     --exclude(-e): string     # Override config by excluding files that match <PATTERN>
+    --help(-h)                # Print help
+  ]
+
+  # A wrapper around the `sed` cli utility to safly manipulate tags
+  export extern "tgr sed" [
+    tag: string               # The tag to be substituded. Note that this command will perform a substitution only on an exact match
+    replacement: string       # The replacement
+    --verbose(-v)             # Print additional information about substitutions
     --help(-h)                # Print help
   ]
 
@@ -71,6 +79,10 @@ module completions {
 
   # Search tags in Org directory or file
   export extern "tgr help search" [
+  ]
+
+  # A wrapper around the `sed` cli utility to safly manipulate tags
+  export extern "tgr help sed" [
   ]
 
   # Print tags to stdout or to pager

@@ -1,5 +1,5 @@
 use crate::{
-    cli::{CountArgs, LocateArgs, RefileArgs, SearchArgs, TagArgs},
+    cli::{CountArgs, LocateArgs, RefileArgs, SearchArgs, SedArgs, TagArgs},
     config::Userconfig,
     count::count,
     io::*,
@@ -9,6 +9,7 @@ use crate::{
 };
 use bat::PrettyPrinter;
 use minus::{MinusError, Pager, page_all};
+use std::process::Command;
 
 pub fn count_command(args: CountArgs) -> Result<(), MinusError> {
     let mut cfg: Userconfig = Userconfig::new();
@@ -91,6 +92,58 @@ pub fn search_command(args: SearchArgs) -> Result<(), MinusError> {
         None => println!("No tags matching the provided pattern were found!"),
         Some(taglist) => print_tags_to_stdout_or_pager(taglist, args.pager)?,
     }
+
+    Ok(())
+}
+
+pub fn sed_command(args: SedArgs) -> Result<(), MinusError> {
+    let cfg: Userconfig = Userconfig::new();
+
+    let files: Vec<String> = locate(
+        LocateArgs {
+            pattern: args.tag.clone(),
+            strict: true,
+            include: None,
+            exclude: None,
+        },
+        cfg.clone(),
+    );
+
+    if files.is_empty() {
+        println!(
+            "There is no tag named `{}` to be substituted",
+            args.tag.clone()
+        );
+
+        return Ok(());
+    }
+
+    let mut counter: usize = 0;
+
+    for fname in files {
+        let sed_str: String = format!("s/:{}:/:{}:/g", args.tag, args.replacement);
+
+        if let Ok(_) = Command::new("sed")
+            .arg("--in-place")
+            .arg(sed_str)
+            .arg(format!("{}/{}", cfg.org_directory, fname))
+            .spawn()
+        {
+            if args.verbose {
+                println!("Performing substitution in file `{}`", fname)
+            }
+            counter += 1;
+        }
+    }
+
+    if args.verbose {
+        print!("\n")
+    }
+
+    println!(
+        "Substituted successfully `{}` with `{}` in {} files",
+        args.tag, args.replacement, counter
+    );
 
     Ok(())
 }

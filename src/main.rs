@@ -15,6 +15,7 @@ fn main() -> Result<(), minus::error::MinusError> {
         Commands::Locate(args) => locate_command(args),
         Commands::Refile(args) => refile_command(args),
         Commands::Search(args) => search_command(args),
+        Commands::Sed(args) => sed_command(args),
         Commands::Tags(args) => tags_command(args),
     }
 }

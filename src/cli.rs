@@ -36,6 +36,9 @@ pub enum Commands {
     /// Search tags in Org directory or file
     #[clap(alias = "s")]
     Search(SearchArgs),
+    /// A wrapper around the `sed` cli utility to safly manipulate tags
+    #[clap()]
+    Sed(SedArgs),
     /// Print tags to stdout or to pager
     #[clap(aliases = &["t", "tag"])]
     Tags(TagArgs),
@@ -82,7 +85,7 @@ pub struct RefileArgs {
     /// Print the contents to stdout instead of pager
     #[arg(short, long, value_name = "NO PAGER")]
     pub no_pager: bool,
-    /// Name of the output file. If not given, ouptut is paged to the console
+    /// Name of the output file. If not given, ouptut is paged or printed to the standard output
     #[arg(value_name = "OUTPUT FILE")]
     pub output_file: Option<String>,
     /// Match the pattern strictly or loosely
@@ -113,6 +116,20 @@ pub struct SearchArgs {
     /// Override config by excluding files that match <PATTERN>
     #[arg(long, short, value_name = "EXCLUDE")]
     pub exclude: Option<String>,
+}
+
+#[derive(Args, Debug, Clone)]
+pub struct SedArgs {
+    /// The tag to be substituded.
+    /// Note that this command will perform a substitution only on an exact match.
+    #[arg(value_name = "TAG")]
+    pub tag: String,
+    /// The replacement
+    #[arg(value_name = "REPLACEMENT")]
+    pub replacement: String,
+    /// Print additional information about substitutions
+    #[arg(long, short, value_name = "VERBOSE")]
+    pub verbose: bool,
 }
 
 #[derive(Args, Debug, Clone)]
