@@ -163,7 +163,7 @@ _tgr_commands() {
 'locate:Locate the files that contain a tag matching <PATTERN>' \
 'refile:Refile org trees that have tags that match a pattern' \
 'search:Search tags in Org directory or file' \
-'sed:A wrapper around the \`sed\` cli utility to safly manipulate tags' \
+'sed:A wrapper around the \`sed\` cli utility to safely manipulate tags' \
 'tags:Print tags to stdout or to pager' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
@@ -181,7 +181,7 @@ _tgr__help_commands() {
 'locate:Locate the files that contain a tag matching <PATTERN>' \
 'refile:Refile org trees that have tags that match a pattern' \
 'search:Search tags in Org directory or file' \
-'sed:A wrapper around the \`sed\` cli utility to safly manipulate tags' \
+'sed:A wrapper around the \`sed\` cli utility to safely manipulate tags' \
 'tags:Print tags to stdout or to pager' \
 'help:Print this message or the help of the given subcommand(s)' \
     )

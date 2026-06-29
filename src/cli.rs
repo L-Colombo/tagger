@@ -1,4 +1,4 @@
-use clap::{Args, Parser, Subcommand, ValueHint, builder::styling};
+use clap::{builder::styling, Args, Parser, Subcommand, ValueHint};
 
 const STYLES: styling::Styles = styling::Styles::styled()
     .header(styling::AnsiColor::Green.on_default().bold())
@@ -36,7 +36,7 @@ pub enum Commands {
     /// Search tags in Org directory or file
     #[clap(alias = "s")]
     Search(SearchArgs),
-    /// A wrapper around the `sed` cli utility to safly manipulate tags
+    /// A wrapper around the `sed` cli utility to safely manipulate tags
     #[clap()]
     Sed(SedArgs),
     /// Print tags to stdout or to pager

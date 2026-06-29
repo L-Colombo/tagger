@@ -57,7 +57,7 @@ commands:
     positional:
     - []
 - name: sed
-  description: A wrapper around the `sed` cli utility to safly manipulate tags
+  description: A wrapper around the `sed` cli utility to safely manipulate tags
   flags:
     -h, --help: Print help
     -v, --verbose: Print additional information about substitutions
@@ -87,7 +87,7 @@ commands:
   - name: search
     description: Search tags in Org directory or file
   - name: sed
-    description: A wrapper around the `sed` cli utility to safly manipulate tags
+    description: A wrapper around the `sed` cli utility to safely manipulate tags
   - name: tags
     description: Print tags to stdout or to pager
   - name: help

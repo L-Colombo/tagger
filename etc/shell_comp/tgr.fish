@@ -30,7 +30,7 @@ complete -c tgr -n "__fish_tgr_needs_command" -f -a "count" -d 'Print the number
 complete -c tgr -n "__fish_tgr_needs_command" -f -a "locate" -d 'Locate the files that contain a tag matching <PATTERN>'
 complete -c tgr -n "__fish_tgr_needs_command" -f -a "refile" -d 'Refile org trees that have tags that match a pattern'
 complete -c tgr -n "__fish_tgr_needs_command" -f -a "search" -d 'Search tags in Org directory or file'
-complete -c tgr -n "__fish_tgr_needs_command" -f -a "sed" -d 'A wrapper around the `sed` cli utility to safly manipulate tags'
+complete -c tgr -n "__fish_tgr_needs_command" -f -a "sed" -d 'A wrapper around the `sed` cli utility to safely manipulate tags'
 complete -c tgr -n "__fish_tgr_needs_command" -f -a "tags" -d 'Print tags to stdout or to pager'
 complete -c tgr -n "__fish_tgr_needs_command" -f -a "help" -d 'Print this message or the help of the given subcommand(s)'
 complete -c tgr -n "__fish_tgr_using_subcommand count" -s f -l file -d 'File where to search for tags' -r -F
@@ -61,6 +61,6 @@ complete -c tgr -n "__fish_tgr_using_subcommand help; and not __fish_seen_subcom
 complete -c tgr -n "__fish_tgr_using_subcommand help; and not __fish_seen_subcommand_from count locate refile search sed tags help" -f -a "locate" -d 'Locate the files that contain a tag matching <PATTERN>'
 complete -c tgr -n "__fish_tgr_using_subcommand help; and not __fish_seen_subcommand_from count locate refile search sed tags help" -f -a "refile" -d 'Refile org trees that have tags that match a pattern'
 complete -c tgr -n "__fish_tgr_using_subcommand help; and not __fish_seen_subcommand_from count locate refile search sed tags help" -f -a "search" -d 'Search tags in Org directory or file'
-complete -c tgr -n "__fish_tgr_using_subcommand help; and not __fish_seen_subcommand_from count locate refile search sed tags help" -f -a "sed" -d 'A wrapper around the `sed` cli utility to safly manipulate tags'
+complete -c tgr -n "__fish_tgr_using_subcommand help; and not __fish_seen_subcommand_from count locate refile search sed tags help" -f -a "sed" -d 'A wrapper around the `sed` cli utility to safely manipulate tags'
 complete -c tgr -n "__fish_tgr_using_subcommand help; and not __fish_seen_subcommand_from count locate refile search sed tags help" -f -a "tags" -d 'Print tags to stdout or to pager'
 complete -c tgr -n "__fish_tgr_using_subcommand help; and not __fish_seen_subcommand_from count locate refile search sed tags help" -f -a "help" -d 'Print this message or the help of the given subcommand(s)'

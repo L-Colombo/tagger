@@ -29,7 +29,7 @@ Register-ArgumentCompleter -Native -CommandName 'tgr' -ScriptBlock {
             [CompletionResult]::new('locate', 'locate', [CompletionResultType]::ParameterValue, 'Locate the files that contain a tag matching <PATTERN>')
             [CompletionResult]::new('refile', 'refile', [CompletionResultType]::ParameterValue, 'Refile org trees that have tags that match a pattern')
             [CompletionResult]::new('search', 'search', [CompletionResultType]::ParameterValue, 'Search tags in Org directory or file')
-            [CompletionResult]::new('sed', 'sed', [CompletionResultType]::ParameterValue, 'A wrapper around the `sed` cli utility to safly manipulate tags')
+            [CompletionResult]::new('sed', 'sed', [CompletionResultType]::ParameterValue, 'A wrapper around the `sed` cli utility to safely manipulate tags')
             [CompletionResult]::new('tags', 'tags', [CompletionResultType]::ParameterValue, 'Print tags to stdout or to pager')
             [CompletionResult]::new('help', 'help', [CompletionResultType]::ParameterValue, 'Print this message or the help of the given subcommand(s)')
             break
@@ -105,7 +105,7 @@ Register-ArgumentCompleter -Native -CommandName 'tgr' -ScriptBlock {
             [CompletionResult]::new('locate', 'locate', [CompletionResultType]::ParameterValue, 'Locate the files that contain a tag matching <PATTERN>')
             [CompletionResult]::new('refile', 'refile', [CompletionResultType]::ParameterValue, 'Refile org trees that have tags that match a pattern')
             [CompletionResult]::new('search', 'search', [CompletionResultType]::ParameterValue, 'Search tags in Org directory or file')
-            [CompletionResult]::new('sed', 'sed', [CompletionResultType]::ParameterValue, 'A wrapper around the `sed` cli utility to safly manipulate tags')
+            [CompletionResult]::new('sed', 'sed', [CompletionResultType]::ParameterValue, 'A wrapper around the `sed` cli utility to safely manipulate tags')
             [CompletionResult]::new('tags', 'tags', [CompletionResultType]::ParameterValue, 'Print tags to stdout or to pager')
             [CompletionResult]::new('help', 'help', [CompletionResultType]::ParameterValue, 'Print this message or the help of the given subcommand(s)')
             break

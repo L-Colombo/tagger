@@ -171,7 +171,7 @@ const completion: Fig.Spec = {
     },
     {
       name: "sed",
-      description: "A wrapper around the `sed` cli utility to safly manipulate tags",
+      description: "A wrapper around the `sed` cli utility to safely manipulate tags",
       options: [
         {
           name: ["-v", "--verbose"],
@@ -241,7 +241,7 @@ const completion: Fig.Spec = {
         },
         {
           name: "sed",
-          description: "A wrapper around the `sed` cli utility to safly manipulate tags",
+          description: "A wrapper around the `sed` cli utility to safely manipulate tags",
         },
         {
           name: "tags",

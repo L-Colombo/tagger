@@ -45,7 +45,7 @@ module completions {
     --help(-h)                # Print help
   ]
 
-  # A wrapper around the `sed` cli utility to safly manipulate tags
+  # A wrapper around the `sed` cli utility to safely manipulate tags
   export extern "tgr sed" [
     tag: string               # The tag to be substituded. Note that this command will perform a substitution only on an exact match
     replacement: string       # The replacement
@@ -81,7 +81,7 @@ module completions {
   export extern "tgr help search" [
   ]
 
-  # A wrapper around the `sed` cli utility to safly manipulate tags
+  # A wrapper around the `sed` cli utility to safely manipulate tags
   export extern "tgr help sed" [
   ]
 
