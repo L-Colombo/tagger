@@ -3,6 +3,8 @@
 + [X] create a ~locate~ command that works similarly to ~search~, but for each tag shows a list of files in which the tag appears.
 * Search [100%]
 + [X] add a ~pager~ flag to force the output to a pager even if the list is short.
+* Sed [0%]
++ [ ] Implement a ~sed~ command to change a tag being sure that it will not attempt to change the anything that is not a tag (the rationale being that sometimes a careless use so the standard ~sed~ command may result in not only tags being changed, but also other words in the body of the text).
 * Config [50%]
 + [X] Add possibility to define an array of exclude patterns.
 * Refile [50%]
