@@ -22,8 +22,8 @@ set edit:completion:arg-completer[tgr] = {|@words|
             cand --help 'Print help (see more with ''--help'')'
             cand -V 'Print version'
             cand --version 'Print version'
-            cand count 'Print the number of tags that match <pattern>'
-            cand locate 'Locate the files that contain a tag matching <PATTERN>'
+            cand count 'Print the number of tags that matching a pattern'
+            cand locate 'Locate the files that contain a tag matching a pattern'
             cand refile 'Refile org trees that have tags that match a pattern'
             cand search 'Search tags in Org directory or file'
             cand sed 'A wrapper around the `sed` cli utility to safely manipulate tags'
@@ -91,8 +91,8 @@ set edit:completion:arg-completer[tgr] = {|@words|
             cand --help 'Print help'
         }
         &'tgr;help'= {
-            cand count 'Print the number of tags that match <pattern>'
-            cand locate 'Locate the files that contain a tag matching <PATTERN>'
+            cand count 'Print the number of tags that matching a pattern'
+            cand locate 'Locate the files that contain a tag matching a pattern'
             cand refile 'Refile org trees that have tags that match a pattern'
             cand search 'Search tags in Org directory or file'
             cand sed 'A wrapper around the `sed` cli utility to safely manipulate tags'

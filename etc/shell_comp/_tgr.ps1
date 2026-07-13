@@ -25,8 +25,8 @@ Register-ArgumentCompleter -Native -CommandName 'tgr' -ScriptBlock {
             [CompletionResult]::new('--help', '--help', [CompletionResultType]::ParameterName, 'Print help (see more with ''--help'')')
             [CompletionResult]::new('-V', '-V ', [CompletionResultType]::ParameterName, 'Print version')
             [CompletionResult]::new('--version', '--version', [CompletionResultType]::ParameterName, 'Print version')
-            [CompletionResult]::new('count', 'count', [CompletionResultType]::ParameterValue, 'Print the number of tags that match <pattern>')
-            [CompletionResult]::new('locate', 'locate', [CompletionResultType]::ParameterValue, 'Locate the files that contain a tag matching <PATTERN>')
+            [CompletionResult]::new('count', 'count', [CompletionResultType]::ParameterValue, 'Print the number of tags that matching a pattern')
+            [CompletionResult]::new('locate', 'locate', [CompletionResultType]::ParameterValue, 'Locate the files that contain a tag matching a pattern')
             [CompletionResult]::new('refile', 'refile', [CompletionResultType]::ParameterValue, 'Refile org trees that have tags that match a pattern')
             [CompletionResult]::new('search', 'search', [CompletionResultType]::ParameterValue, 'Search tags in Org directory or file')
             [CompletionResult]::new('sed', 'sed', [CompletionResultType]::ParameterValue, 'A wrapper around the `sed` cli utility to safely manipulate tags')
@@ -101,8 +101,8 @@ Register-ArgumentCompleter -Native -CommandName 'tgr' -ScriptBlock {
             break
         }
         'tgr;help' {
-            [CompletionResult]::new('count', 'count', [CompletionResultType]::ParameterValue, 'Print the number of tags that match <pattern>')
-            [CompletionResult]::new('locate', 'locate', [CompletionResultType]::ParameterValue, 'Locate the files that contain a tag matching <PATTERN>')
+            [CompletionResult]::new('count', 'count', [CompletionResultType]::ParameterValue, 'Print the number of tags that matching a pattern')
+            [CompletionResult]::new('locate', 'locate', [CompletionResultType]::ParameterValue, 'Locate the files that contain a tag matching a pattern')
             [CompletionResult]::new('refile', 'refile', [CompletionResultType]::ParameterValue, 'Refile org trees that have tags that match a pattern')
             [CompletionResult]::new('search', 'search', [CompletionResultType]::ParameterValue, 'Search tags in Org directory or file')
             [CompletionResult]::new('sed', 'sed', [CompletionResultType]::ParameterValue, 'A wrapper around the `sed` cli utility to safely manipulate tags')

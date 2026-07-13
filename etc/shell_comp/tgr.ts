@@ -4,7 +4,7 @@ const completion: Fig.Spec = {
   subcommands: [
     {
       name: ["count", "c"],
-      description: "Print the number of tags that match <pattern>",
+      description: "Print the number of tags that matching a pattern",
       options: [
         {
           name: ["-f", "--file"],
@@ -46,7 +46,7 @@ const completion: Fig.Spec = {
     },
     {
       name: ["locate", "l", "loc"],
-      description: "Locate the files that contain a tag matching <PATTERN>",
+      description: "Locate the files that contain a tag matching a pattern",
       options: [
         {
           name: ["-i", "--include"],
@@ -225,11 +225,11 @@ const completion: Fig.Spec = {
       subcommands: [
         {
           name: "count",
-          description: "Print the number of tags that match <pattern>",
+          description: "Print the number of tags that matching a pattern",
         },
         {
           name: "locate",
-          description: "Locate the files that contain a tag matching <PATTERN>",
+          description: "Locate the files that contain a tag matching a pattern",
         },
         {
           name: "refile",

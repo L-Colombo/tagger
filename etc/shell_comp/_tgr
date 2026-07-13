@@ -159,8 +159,8 @@ esac
 (( $+functions[_tgr_commands] )) ||
 _tgr_commands() {
     local commands; commands=(
-'count:Print the number of tags that match <pattern>' \
-'locate:Locate the files that contain a tag matching <PATTERN>' \
+'count:Print the number of tags that matching a pattern' \
+'locate:Locate the files that contain a tag matching a pattern' \
 'refile:Refile org trees that have tags that match a pattern' \
 'search:Search tags in Org directory or file' \
 'sed:A wrapper around the \`sed\` cli utility to safely manipulate tags' \
@@ -177,8 +177,8 @@ _tgr__count_commands() {
 (( $+functions[_tgr__help_commands] )) ||
 _tgr__help_commands() {
     local commands; commands=(
-'count:Print the number of tags that match <pattern>' \
-'locate:Locate the files that contain a tag matching <PATTERN>' \
+'count:Print the number of tags that matching a pattern' \
+'locate:Locate the files that contain a tag matching a pattern' \
 'refile:Refile org trees that have tags that match a pattern' \
 'search:Search tags in Org directory or file' \
 'sed:A wrapper around the \`sed\` cli utility to safely manipulate tags' \

@@ -7,7 +7,7 @@ commands:
 - name: count
   aliases:
   - c
-  description: Print the number of tags that match <pattern>
+  description: Print the number of tags that matching a pattern
   flags:
     -e, --exclude=: Override config by excluding files that match <PATTERN>
     -f, --file=: File where to search for tags
@@ -23,7 +23,7 @@ commands:
   aliases:
   - l
   - loc
-  description: Locate the files that contain a tag matching <PATTERN>
+  description: Locate the files that contain a tag matching a pattern
   flags:
     -e, --exclude=: Override config by excluding files that match <PATTERN>
     -h, --help: Print help
@@ -79,9 +79,9 @@ commands:
   description: Print this message or the help of the given subcommand(s)
   commands:
   - name: count
-    description: Print the number of tags that match <pattern>
+    description: Print the number of tags that matching a pattern
   - name: locate
-    description: Locate the files that contain a tag matching <PATTERN>
+    description: Locate the files that contain a tag matching a pattern
   - name: refile
     description: Refile org trees that have tags that match a pattern
   - name: search

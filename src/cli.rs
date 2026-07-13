@@ -1,4 +1,4 @@
-use clap::{builder::styling, Args, Parser, Subcommand, ValueHint};
+use clap::{Args, Parser, Subcommand, ValueHint, builder::styling};
 
 const STYLES: styling::Styles = styling::Styles::styled()
     .header(styling::AnsiColor::Green.on_default().bold())
@@ -24,10 +24,10 @@ pub struct Cli {
 
 #[derive(Debug, Subcommand)]
 pub enum Commands {
-    /// Print the number of tags that match <pattern>
+    /// Print the number of tags that matching a pattern
     #[clap(alias = "c")]
     Count(CountArgs),
-    /// Locate the files that contain a tag matching <PATTERN>
+    /// Locate the files that contain a tag matching a pattern
     #[clap(aliases = &["l", "loc"])]
     Locate(LocateArgs),
     /// Refile org trees that have tags that match a pattern
