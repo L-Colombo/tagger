@@ -1,7 +1,7 @@
 VERSION=v0.2.6
 NAME=tagger
 EXEC=tgr
-INSTALL_DIR=$(HOME)/.local/bin
+INSTALL_DIR=/usr/local/bin
 ZSH_COMP_DIR=/usr/share/zsh/site-functions/
 MAN_DIR=/usr/share/man/man1/
 
